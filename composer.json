@@ -3,7 +3,8 @@
   "description": "Laravel cashier shop",
   "autoload": {
     "psr-4": {
-      "Atin\\LaravelCashierShop\\": "src"
+      "Atin\\LaravelCashierShop\\": "src",
+      "Atin\\LaravelCashierShop\\Database\\Seeders\\": "database/seeders"
     }
   },
   "extra": {
