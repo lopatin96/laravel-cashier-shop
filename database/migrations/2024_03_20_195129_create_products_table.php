@@ -13,9 +13,14 @@ return new class extends Migration
             $table->engine = 'InnoDB';
 
             $table->id();
+            $table->string('hashid')->nullable();
             $table->string('price_id')->unique();
             $table->string('category');
+            $table->string('name');
             $table->string('status')->default(ProductStatus::Design);
+            $table->string('model')->nullable();
+            $table->json('prices')->nullable();
+            $table->json('properties')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

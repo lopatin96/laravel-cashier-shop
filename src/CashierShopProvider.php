@@ -20,9 +20,9 @@ class CashierShopProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'laravel-cashier-shop');
 
         $this->loadTranslationsFrom(__DIR__.'/../lang', 'laravel-cashier-shop');
-//
-//        $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'laravel-subscription');
-//
+
+        $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'laravel-cashier-shop');
+
         $this->publishes([
             __DIR__.'/../database/migrations' => database_path('/migrations')
         ], 'laravel-cashier-shop-migrations');
@@ -35,9 +35,9 @@ class CashierShopProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../resources/views' => resource_path('views/vendor/laravel-cashier-shop')
         ], 'laravel-cashier-shop-views');
-//
-//        $this->publishes([
-//            __DIR__.'/../config/config.php' => config_path('laravel-subscription.php')
-//        ], 'laravel-subscription-config');
+
+        $this->publishes([
+            __DIR__.'/../config/config.php' => config_path('laravel-cashier-shop.php')
+        ], 'laravel-cashier-shop-config');
     }
 }

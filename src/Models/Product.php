@@ -5,10 +5,13 @@ namespace Atin\LaravelCashierShop\Models;
 use Atin\LaravelCashierShop\Enums\ProductStatus;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Veelasky\LaravelHashId\Eloquent\HashableId;
 
 class Product extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, HashableId;
+
+    protected $shouldHashPersist = true;
 
     protected $guarded = [
         'id',
@@ -18,6 +21,8 @@ class Product extends Model
 
     protected $casts = [
         'status' => ProductStatus::class,
+        'prices' => 'array',
+        'properties' => 'object',
     ];
 
     public function getRouteKeyName() {

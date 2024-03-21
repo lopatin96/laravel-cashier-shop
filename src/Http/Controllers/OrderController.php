@@ -28,6 +28,8 @@ class OrderController extends Controller
             return;
         }
 
+        // todo: validate quantity
+
         $order = Order::create([
             'user_id' => auth()->id(),
             'product_id' => $product->id,
@@ -38,13 +40,11 @@ class OrderController extends Controller
             return; // todo: info for user
         }
 
-        $quantity = 1;
-
         return $request->user()->checkout([
             $product->price_id => $quantity
         ], [
             'success_url' => route('checkout-success').'?session_id={CHECKOUT_SESSION_ID}',
-            'cancel_url' => route('checkout-cancel'),
+            'cancel_url' => route('checkout-cancel').'?session_id={CHECKOUT_SESSION_ID}',
             'metadata' => ['order_id' => $order->id],
         ]);
     }
@@ -54,13 +54,21 @@ class OrderController extends Controller
         $sessionId = $request->get('session_id');
 
         if ($sessionId === null) {
-            return;
+            // todo: log error
+            return redirect('/shop')->with([
+                'flash.banner' => __('Произошла ошибка. Повторите пожалуйста еще раз через какое-то время.'),
+                'flash.bannerStyle' => 'danger',
+            ]);
         }
 
         $session = Cashier::stripe()->checkout->sessions->retrieve($sessionId);
 
         if ($session->payment_status !== 'paid') {
-            return;
+            // todo: log error
+            return redirect('/shop')->with([
+                'flash.banner' => __('Что-то пошло не так. Не волнуйтесь, обратитесь к консультанту (перейдите на сайт и нажмите на иноку сообщения в правом нижнем углу).'),
+                'flash.bannerStyle' => 'danger',
+            ]);
         }
 
         $orderId = $session['metadata']['order_id'] ?? null;
@@ -69,21 +77,32 @@ class OrderController extends Controller
 
         $order->update(['status' => OrderStatus::Completed]);
 
-        return 'ok';
-        return view('checkout-success', ['order' => $order]);
-
-        return view('laravel-blog::posts.index', [
-            'posts' => Post::getPublished()
-                ->paginate(),
+        return redirect('/shop')->with([
+            'flash.banner' => __('Оплата прошла успешно.'),
+            'flash.bannerStyle' => 'success',
         ]);
     }
 
-    public function cancel()
+    public function cancel(Request $request)
     {
-        return 'cancel';
-        return view('laravel-blog::posts.index', [
-            'posts' => Post::getPublished()
-                ->paginate(),
-        ]);
+        $sessionId = $request->get('session_id');
+
+        if ($sessionId === null) {
+            return redirect('/shop');
+        }
+
+        $session = Cashier::stripe()->checkout->sessions->retrieve($sessionId);
+
+        if ($session->payment_status !== 'paid') {
+            return redirect('/shop');
+        }
+
+        $orderId = $session['metadata']['order_id'] ?? null;
+
+        $order = Order::findOrFail($orderId);
+
+        $order->update(['status' => OrderStatus::Canceled]);
+
+        return redirect('/shop');
     }
 }

@@ -1,5 +1,10 @@
 <x-shop-layout>
-    @include('laravel-cashier-shop::shop.components.info')
+    @php
+        $country = auth()->user()->country ?? 'us';
+        $locale = auth()->user()->locale ?? 'en';
+    @endphp
+
+    <x-banner />
 
     @foreach($productsByCategory as $category => $products)
         @include('laravel-cashier-shop::shop.components.category', [

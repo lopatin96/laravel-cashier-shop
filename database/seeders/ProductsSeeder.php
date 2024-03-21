@@ -20,6 +20,6 @@ class ProductsSeeder extends Seeder
             ],
         ];
 
-        DB::table('products')->insert($data);
+        DB::table('Products')->insert($data);
     }
 }
