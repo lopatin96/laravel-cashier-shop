@@ -25,19 +25,23 @@ class OrderController extends Controller
     public function checkout(Request $request, Product $product, int $quantity = 1)
     {
         if (! $product->isDeployed()) {
-            return;
+            return redirect('/shop')->with([
+                'flash.banner' => __('An error has occurred. Please try again after some time.'),
+                'flash.bannerStyle' => 'danger',
+            ]);
         }
-
-        // todo: validate quantity
 
         $order = Order::create([
             'user_id' => auth()->id(),
             'product_id' => $product->id,
-            'quantity' => $quantity,
+            'quantity' => min($product['properties']->max_quantity ?? 99, max(1, $quantity)),
         ]);
 
         if (! $order) {
-            return; // todo: info for user
+            return redirect('/shop')->with([
+                'flash.banner' => __('An error has occurred. Please try again after some time.'),
+                'flash.bannerStyle' => 'danger',
+            ]);
         }
 
         return $request->user()->checkout([
@@ -56,7 +60,7 @@ class OrderController extends Controller
         if ($sessionId === null) {
             // todo: log error
             return redirect('/shop')->with([
-                'flash.banner' => __('Произошла ошибка. Повторите пожалуйста еще раз через какое-то время.'),
+                'flash.banner' => __('An error has occurred. Please try again after some time.'),
                 'flash.bannerStyle' => 'danger',
             ]);
         }
@@ -66,7 +70,7 @@ class OrderController extends Controller
         if ($session->payment_status !== 'paid') {
             // todo: log error
             return redirect('/shop')->with([
-                'flash.banner' => __('Что-то пошло не так. Не волнуйтесь, обратитесь к консультанту (перейдите на сайт и нажмите на иноку сообщения в правом нижнем углу).'),
+                'flash.banner' => __('Something went wrong. Don’t worry, contact our technical support (go to the main page of the site and click on the chat icon in the lower right corner of the screen).'),
                 'flash.bannerStyle' => 'danger',
             ]);
         }
@@ -78,7 +82,7 @@ class OrderController extends Controller
         $order->update(['status' => OrderStatus::Completed]);
 
         return redirect('/shop')->with([
-            'flash.banner' => __('Оплата прошла успешно.'),
+            'flash.banner' => __('The payment was successful. You have purchased the product.'),
             'flash.bannerStyle' => 'success',
         ]);
     }
