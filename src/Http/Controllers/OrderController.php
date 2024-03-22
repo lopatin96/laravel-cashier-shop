@@ -18,7 +18,7 @@ class OrderController extends Controller
                 $carry[$item['category']][] = $item;
 
                 return $carry;
-            })
+            }),
         ]);
     }
 

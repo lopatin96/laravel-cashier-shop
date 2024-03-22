@@ -6,10 +6,14 @@
 
     <x-banner />
 
-    @foreach($productsByCategory as $category => $products)
-        @include('laravel-cashier-shop::shop.components.category', [
-            'category' => $category,
-            'products' => $products,
-        ])
-    @endforeach
+    @if($productsByCategory)
+        @foreach($productsByCategory as $category => $products)
+            @include('laravel-cashier-shop::shop.components.category', [
+                'category' => $category,
+                'products' => $products,
+            ])
+        @endforeach
+    @else
+        {{ __('No products yet') }}
+    @endif
 </x-shop-layout>

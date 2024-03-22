@@ -21,7 +21,7 @@
     </div>
 
     <div
-        class="flex justify-between space-x-4"
+        class="flex md:flex-col lg:flex-row xl:flex-col justify-between space-x-4 md:space-x-0 lg:space-x-4 xl:space-x-0 md:space-y-2 lg:space-y-0 xl:space-y-2"
         x-data="{
             quantity: 1,
             max_quantity: {{ $product['properties']->max_quantity ?? 99 }},
