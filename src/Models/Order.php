@@ -51,6 +51,11 @@ class Order extends Model
         return $this->status === OrderStatus::Canceled;
     }
 
+    public function scopeStatus($query, OrderStatus $status): void
+    {
+        $query->where('status', $status);
+    }
+
     public static function boot()
     {
         parent::boot();

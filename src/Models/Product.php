@@ -49,8 +49,8 @@ class Product extends Model
         return $this->status === ProductStatus::Retired;
     }
 
-    public function scopeStatus($query, ProductStatus $productStatus): void
+    public function scopeStatus($query, ProductStatus $status): void
     {
-        $query->where('status', $productStatus);
+        $query->where('status', $status);
     }
 }
