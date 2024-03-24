@@ -31,10 +31,12 @@ class OrderController extends Controller
             ]);
         }
 
+        $quantity = min($product['properties']->max_quantity ?? 99, max(1, $quantity));
+
         $order = Order::create([
             'user_id' => auth()->id(),
             'product_id' => $product->id,
-            'quantity' => min($product['properties']->max_quantity ?? 99, max(1, $quantity)),
+            'quantity' => $quantity,
         ]);
 
         if (! $order) {
@@ -45,7 +47,7 @@ class OrderController extends Controller
         }
 
         return $request->user()->checkout([
-            $product->price_id => $quantity
+            $product->price_id => $quantity,
         ], [
             'success_url' => route('checkout-success').'?session_id={CHECKOUT_SESSION_ID}',
             'cancel_url' => route('checkout-cancel').'?session_id={CHECKOUT_SESSION_ID}',

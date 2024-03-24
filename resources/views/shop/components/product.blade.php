@@ -1,7 +1,7 @@
 <div class="space-y-3">
     <div class="bg-gray-100 rounded-lg">
-        <div class="flex items-center justify-between px-5 py-3">
-            <p class="text-gray-800 font-semibold">
+        <div class="flex justify-between space-x-2 px-5 py-3">
+            <p class="text-gray-800 font-semibold leading-5">
                 {{ __("laravel-cashier-shop::shop.products.{$product['category']}.{$product['name']}.title") }}
             </p>
             <x-laravel-ui-components::tooltip text="{{ __('laravel-cashier-shop::shop.products.'. $product['category'] . '.' . $product['name'] . '.description') }}" />
@@ -21,12 +21,12 @@
     </div>
 
     <div
-        class="flex md:flex-col lg:flex-row xl:flex-col justify-between space-x-4 md:space-x-0 lg:space-x-4 xl:space-x-0 md:space-y-2 lg:space-y-0 xl:space-y-2"
+        class="flex md:flex-col lg:flex-row xl:flex-col justify-between items-end space-x-4 md:space-x-0 lg:space-x-4 xl:space-x-0 md:space-y-2 lg:space-y-0 xl:space-y-2"
         x-data="{
             quantity: 1,
             max_quantity: {{ $product['properties']->max_quantity ?? 99 }},
             hashid: '{{ $product['hashid'] }}',
-         }"
+        }"
     >
         <div>
             @unless($product['properties']->one_time ?? false)
