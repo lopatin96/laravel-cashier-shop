@@ -14,6 +14,36 @@
             ])
         @endforeach
     @else
-        {{ __('No products yet') }}
+        <p class="text-center">
+            {{ __('No products yet') }}
+        </p>
     @endif
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const focuses = urlParams.get('focus');
+
+        if (focuses) {
+            const keyframes = [
+                { backgroundColor: "#f0fdf4" },
+                { transform: "scale(1.05)" },
+                { backgroundColor: "#dcfce7" },
+                { transform: "scale(1)" },
+                { backgroundColor: "#f0fdf4" },
+            ];
+
+            const options = {
+                duration: 1000,
+                iterations: 5,
+            };
+
+            focuses.split(",").forEach(function(focus) {
+                const product = document.querySelector("[data-product='" + focus + "'] [data-product-body]");
+
+                if (product) {
+                    product.animate(keyframes, options)
+                }
+            });
+        }
+    </script>
 </x-shop-layout>

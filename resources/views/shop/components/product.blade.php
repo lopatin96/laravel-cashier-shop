@@ -1,5 +1,11 @@
-<div class="space-y-3">
-    <div class="bg-gray-100 rounded-lg">
+<div
+    data-product="{{ $product['name'] }}"
+    class="space-y-3 newspaper"
+>
+    <div
+        data-product-body
+        class="bg-gray-100 rounded-lg"
+    >
         <div class="flex justify-between space-x-2 px-5 py-3">
             <p class="text-gray-800 font-semibold leading-5">
                 {{ __("laravel-cashier-shop::shop.products.{$product['category']}.{$product['name']}.title") }}
