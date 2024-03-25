@@ -27,22 +27,29 @@
             const keyframes = [
                 { backgroundColor: "#f0fdf4" },
                 { transform: "scale(1.05)" },
-                { backgroundColor: "#dcfce7" },
+                { backgroundColor: "#bbf7d0" },
                 { transform: "scale(1)" },
                 { backgroundColor: "#f0fdf4" },
             ];
 
             const options = {
                 duration: 1000,
-                iterations: 5,
+                iterations: 3,
             };
 
             focuses.split(",").forEach(function(focus) {
                 const product = document.querySelector("[data-product='" + focus + "'] [data-product-body]");
 
                 if (product) {
-                    product.animate(keyframes, options)
+                    product.animate(keyframes, options);
+
+                    window.scrollBy({
+                        top: product.getBoundingClientRect().top -50,
+                        behavior: 'smooth',
+                    });
                 }
+
+
             });
         }
     </script>

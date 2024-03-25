@@ -14,8 +14,8 @@ class OrderController extends Controller
     public function index()
     {
         return view('laravel-cashier-shop::shop.index', [
-            'productsByCategory' => array_reduce(Product::status(ProductStatus::Deployed)->get()->toArray(), static function($carry, $item) {
-                $carry[$item['category']][] = $item;
+            'productsByCategory' => Product::status(ProductStatus::Deployed)->get()->reduce(static function($carry, $item) {
+                $carry[$item->category][] = $item;
 
                 return $carry;
             }),

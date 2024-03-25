@@ -5,7 +5,9 @@ namespace Atin\LaravelCashierShop\Models;
 use Atin\LaravelCashierShop\Enums\ProductStatus;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use ReflectionException;
 use Veelasky\LaravelHashId\Eloquent\HashableId;
+use App\Models\User;
 
 class Product extends Model
 {
@@ -25,7 +27,8 @@ class Product extends Model
         'properties' => 'object',
     ];
 
-    public function getRouteKeyName() {
+    public function getRouteKeyName(): string
+    {
         return 'id';
     }
 
@@ -52,5 +55,28 @@ class Product extends Model
     public function scopeStatus($query, ProductStatus $status): void
     {
         $query->where('status', $status);
+    }
+
+    public function scopeWhereModel($query, string $model): void
+    {
+        $query->where('model', $model);
+    }
+
+    /**
+     * @throws ReflectionException
+     */
+    public function instance(): ?object
+    {
+        if (! $this->model) {
+            return null;
+        }
+
+        return (new \ReflectionClass('App\\Products\\'.$this->model))
+            ->newInstanceWithoutConstructor();
+    }
+
+    public function canBePurchased(User $user): bool
+    {
+        return $this->instance()?->canBePurchased($user) ?? true;
     }
 }

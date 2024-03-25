@@ -56,20 +56,21 @@ class Order extends Model
         $query->where('status', $status);
     }
 
-    public static function boot()
+    public static function boot(): void
     {
         parent::boot();
 
-        static::updated(static function (Order $order) {
+        static::updating(static function (Order $order) {
             if (
                 $order->product->model
-                && $order->wasChanged('status')
+                && $order->isDirty('status')
                 && $order->getOriginal('status') === OrderStatus::Incomplete
                 && $order->isCompleted()
+                && ($instance = $order->product->instance())
             ) {
-                (new \ReflectionClass('App\\Products\\'.$order->product->model))
-                    ->newInstanceWithoutConstructor()
-                    ->run($order);
+                $instance->process($order);
+
+                $order->status = OrderStatus::Processed;
             }
         });
     }
