@@ -39,7 +39,7 @@
         }"
     >
         <div>
-            @if($product->feature)
+            @if($product->properties->one_time_purchase ?? null)
                 @if($canBePurchased)
                     <p class="text-sm font-semibold text-gray-500">
                         {{ __('Not purchased') }}
@@ -51,7 +51,7 @@
                 @endif
             @endif
 
-            @if(! $product->feature && $canBePurchased)
+            @if(! ($product->properties->one_time_purchase ?? null) && $canBePurchased)
                 <div class="py-1 px-3 inline-block bg-white border border-gray-200 rounded-lg">
                     <div class="flex items-center gap-x-1.5">
                         <button
