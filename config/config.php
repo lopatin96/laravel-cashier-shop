@@ -18,7 +18,7 @@ return [
         'pl' => 'PLN',
         'ua' => 'UAH',
         'ru' => 'RUB',
-        'tl' => 'TRY',
+        'tr' => 'TRY',
     ],
 
 ];
