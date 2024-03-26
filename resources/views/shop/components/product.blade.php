@@ -1,35 +1,69 @@
-<div class="space-y-3">
-    <div class="bg-gray-100 rounded-lg">
-        <div class="flex items-center justify-between px-5 py-3">
-            <p class="text-gray-800 font-semibold">
-                {{ __("laravel-cashier-shop::shop.products.{$product['category']}.{$product['name']}.title") }}
+@php
+    $canBePurchased = $product->canBePurchased(auth()->user());
+@endphp
+
+<div
+    data-product="{{ $product->name }}"
+    class="space-y-3 newspaper"
+>
+    <div
+        data-product-body
+        class="bg-gray-100 rounded-lg"
+    >
+        <div class="flex justify-between space-x-2 px-5 py-3">
+            <p class="text-gray-800 font-semibold leading-5">
+                {{ __("laravel-cashier-shop::shop.products.$product->category.$product->name.title") }}
             </p>
-            <x-laravel-ui-components::tooltip text="{{ __('laravel-cashier-shop::shop.products.'. $product['category'] . '.' . $product['name'] . '.description') }}" />
+            <x-laravel-ui-components::tooltip text="{{ __('laravel-cashier-shop::shop.products.'. $product->category . '.' . $product->name . '.description') }}" />
         </div>
 
         <hr class="opacity-90 mx-5">
 
-        <p class="text-xl font-bold text-center py-3">
-            {{
-                Number::currency(
-                    array_key_exists($country, $product['prices']) ? $product['prices'][$country] : $product['prices']['us'],
-                    in: array_key_exists($country, $product['prices']) && array_key_exists($country, config("laravel-cashier-shop.country_to_currency")) ? config("laravel-cashier-shop.country_to_currency")[$country] : 'USD',
-                    locale: $locale,
-                )
-            }}
-        </p>
+        @if($canBePurchased)
+            <p class="text-xl font-bold text-center py-3">
+                {{
+                    Number::currency(
+                        $product->prices[$country] ?? $product->prices['us'],
+                        in: array_key_exists($country, $product->prices) && array_key_exists($country, config("laravel-cashier-shop.country_to_currency")) ? config("laravel-cashier-shop.country_to_currency")[$country] : 'USD',
+                        locale: $locale,
+                    )
+                }}
+            </p>
+        @else
+            <div class="flex items-center justify-center space-x-2 py-3 text-gray-500 select-none cursor-default">
+                <svg
+                    class="shrink-0 size-4"
+                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"
+                >
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                </svg>
+
+                <p class="text-lg font-semibold">
+                    {{ __('Purchased') }}
+                </p>
+
+            </div>
+        @endif
     </div>
 
     <div
-        class="flex md:flex-col lg:flex-row xl:flex-col justify-between space-x-4 md:space-x-0 lg:space-x-4 xl:space-x-0 md:space-y-2 lg:space-y-0 xl:space-y-2"
+        class="flex md:flex-col lg:flex-row xl:flex-col justify-between items-end space-x-4 md:space-x-0 lg:space-x-4 xl:space-x-0 md:space-y-2 lg:space-y-0 xl:space-y-2"
         x-data="{
             quantity: 1,
-            max_quantity: {{ $product['properties']->max_quantity ?? 99 }},
-            hashid: '{{ $product['hashid'] }}',
-         }"
+            max_quantity: {{ $product->properties->max_quantity ?? 99 }},
+            hashid: '{{ $product->hashid }}',
+        }"
     >
         <div>
-            @unless($product['properties']->one_time ?? false)
+            @if($product->properties->one_time_purchase ?? null)
+                @if($canBePurchased)
+                    <p class="text-sm font-semibold text-gray-500">
+                        {{ __('Not purchased') }}
+                    </p>
+                @endif
+            @endif
+
+            @if(! ($product->properties->one_time_purchase ?? null) && $canBePurchased)
                 <div class="py-1 px-3 inline-block bg-white border border-gray-200 rounded-lg">
                     <div class="flex items-center gap-x-1.5">
                         <button
@@ -54,13 +88,15 @@
             @endif
         </div>
 
-        <a
-            :href="'/checkout/' + hashid + '/' + quantity"
-            class="shrink-0"
-        >
-            <x-button type="button">
-                {{ __('Buy Now') }}
-            </x-button>
-        </a>
+        @if($canBePurchased)
+            <a
+                :href="'/checkout/' + hashid + '/' + quantity"
+                class="shrink-0"
+            >
+                <x-button type="button">
+                    {{ __('Buy Now') }}
+                </x-button>
+            </a>
+        @endif
     </div>
 </div>

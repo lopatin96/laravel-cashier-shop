@@ -14,8 +14,8 @@ class OrderController extends Controller
     public function index()
     {
         return view('laravel-cashier-shop::shop.index', [
-            'productsByCategory' => array_reduce(Product::status(ProductStatus::Deployed)->get()->toArray(), static function($carry, $item) {
-                $carry[$item['category']][] = $item;
+            'productsByCategory' => Product::status(ProductStatus::Deployed)->get()->reduce(static function($carry, $item) {
+                $carry[$item->category][] = $item;
 
                 return $carry;
             }),
@@ -31,10 +31,21 @@ class OrderController extends Controller
             ]);
         }
 
+        if (! $product->canBePurchased(auth()->user())) {
+            return redirect('/shop')->with([
+                'flash.banner' => __('An error has occurred. You have already purchased this product.'),
+                'flash.bannerStyle' => 'danger',
+            ]);
+        }
+
+        $quantity = ($product->properties->one_time_purchase ?? false)
+            ? 1
+            : min($product->properties->max_quantity ?? 99, max(1, $quantity));
+
         $order = Order::create([
             'user_id' => auth()->id(),
             'product_id' => $product->id,
-            'quantity' => min($product['properties']->max_quantity ?? 99, max(1, $quantity)),
+            'quantity' => $quantity,
         ]);
 
         if (! $order) {
@@ -45,7 +56,7 @@ class OrderController extends Controller
         }
 
         return $request->user()->checkout([
-            $product->price_id => $quantity
+            $product->price_id => $quantity,
         ], [
             'success_url' => route('checkout-success').'?session_id={CHECKOUT_SESSION_ID}',
             'cancel_url' => route('checkout-cancel').'?session_id={CHECKOUT_SESSION_ID}',
