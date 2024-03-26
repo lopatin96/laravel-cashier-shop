@@ -31,6 +31,13 @@ class OrderController extends Controller
             ]);
         }
 
+        if (! $product->canBePurchased(auth()->user())) {
+            return redirect('/shop')->with([
+                'flash.banner' => __('An error has occurred. You have already purchased this product.'),
+                'flash.bannerStyle' => 'danger',
+            ]);
+        }
+
         $quantity = ($product->properties->one_time_purchase ?? false)
             ? 1
             : min($product->properties->max_quantity ?? 99, max(1, $quantity));
