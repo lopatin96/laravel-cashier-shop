@@ -31,7 +31,9 @@ class OrderController extends Controller
             ]);
         }
 
-        $quantity = min($product['properties']->max_quantity ?? 99, max(1, $quantity));
+        $quantity = ($product->properties->one_time_purchase ?? false)
+            ? 1
+            : min($product->properties->max_quantity ?? 99, max(1, $quantity));
 
         $order = Order::create([
             'user_id' => auth()->id(),

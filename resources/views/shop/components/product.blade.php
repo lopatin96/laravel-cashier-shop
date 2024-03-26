@@ -19,15 +19,31 @@
 
         <hr class="opacity-90 mx-5">
 
-        <p class="text-xl font-bold text-center py-3">
-            {{
-                Number::currency(
-                    $product->prices[$country] ?? $product->prices['us'],
-                    in: array_key_exists($country, $product->prices) && array_key_exists($country, config("laravel-cashier-shop.country_to_currency")) ? config("laravel-cashier-shop.country_to_currency")[$country] : 'USD',
-                    locale: $locale,
-                )
-            }}
-        </p>
+        @if($canBePurchased)
+            <p class="text-xl font-bold text-center py-3">
+                {{
+                    Number::currency(
+                        $product->prices[$country] ?? $product->prices['us'],
+                        in: array_key_exists($country, $product->prices) && array_key_exists($country, config("laravel-cashier-shop.country_to_currency")) ? config("laravel-cashier-shop.country_to_currency")[$country] : 'USD',
+                        locale: $locale,
+                    )
+                }}
+            </p>
+        @else
+            <div class="flex items-center justify-center space-x-2 py-3 text-gray-500 select-none cursor-default">
+                <svg
+                    class="shrink-0 size-4"
+                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"
+                >
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                </svg>
+
+                <p class="text-lg font-semibold">
+                    {{ __('Purchased') }}
+                </p>
+
+            </div>
+        @endif
     </div>
 
     <div
@@ -43,10 +59,6 @@
                 @if($canBePurchased)
                     <p class="text-sm font-semibold text-gray-500">
                         {{ __('Not purchased') }}
-                    </p>
-                @else
-                    <p class="text-sm font-semibold text-green-500">
-                        {{ __('Purchased') }}
                     </p>
                 @endif
             @endif
