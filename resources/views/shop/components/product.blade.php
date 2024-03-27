@@ -17,6 +17,14 @@
             <x-laravel-ui-components::tooltip text="{{ __('laravel-cashier-shop::shop.products.'. $product->category . '.' . $product->name . '.description') }}" />
         </div>
 
+        @if($product->properties->subtitle ?? false)
+            <div class="px-5 pb-2">
+                <p class="text-gray-400 text-sm leading-4">
+                    {{ __("laravel-cashier-shop::shop.products.$product->category.$product->name.subtitle") }}
+                </p>
+            </div>
+        @endif
+
         <hr class="opacity-90 mx-5">
 
         @if($canBePurchased)
@@ -55,15 +63,13 @@
         }"
     >
         <div>
-            @if($product->properties->one_time_purchase ?? null)
-                @if($canBePurchased)
-                    <p class="text-sm font-semibold text-gray-500">
-                        {{ __('Not purchased') }}
-                    </p>
-                @endif
+            @if($canBePurchased && ($product->properties->one_time_purchase ?? false))
+                <p class="text-sm font-semibold text-gray-500">
+                    {{ __('Not purchased') }}
+                </p>
             @endif
 
-            @if(! ($product->properties->one_time_purchase ?? null) && $canBePurchased)
+            @if($canBePurchased && ! ($product->properties->one_time_purchase ?? false))
                 <div class="py-1 px-3 inline-block bg-white border border-gray-200 rounded-lg">
                     <div class="flex items-center gap-x-1.5">
                         <button
