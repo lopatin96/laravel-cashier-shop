@@ -27,7 +27,7 @@
     "lopatin96/laravel-ui-components": "^1.0",
     "lopatin96/laravel-activitylog": "^1.0",
     "veelasky/laravel-hashid": "*",
-    "lopatin96/laravel-configurator"
+    "lopatin96/laravel-configurator": "^1.0"
   },
   "require-dev": {
     "orchestra/testbench": "^8.0"
