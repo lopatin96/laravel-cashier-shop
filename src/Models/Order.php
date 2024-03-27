@@ -3,9 +3,14 @@
 namespace Atin\LaravelCashierShop\Models;
 
 use Atin\LaravelCashierShop\Enums\OrderStatus;
+use Atin\LaravelCashierShop\Notifications\NewOrder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Notification;
+use Atin\LaravelConfigurator\Helpers\ConfiguratorHelper;
+use App\Enums\ConfigKey;
+use App\Models\User;
 
 class Order extends Model
 {
@@ -23,7 +28,7 @@ class Order extends Model
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(\App\Models\User::class);
+        return $this->belongsTo(User::class);
     }
 
     public function product(): BelongsTo
@@ -71,6 +76,18 @@ class Order extends Model
                 $instance->process($order);
 
                 $order->status = OrderStatus::Processed;
+            }
+        });
+
+        static::updated(static function (Order $order) {
+            Notification::send(User::find(1), new NewOrder($order));
+            if (
+                $order->wasChanged('status')
+                && $order->getOriginal('status') === OrderStatus::Incomplete
+                && $order->isCompleted()
+                && in_array(substr(NewOrder::class, strrpos(NewOrder::class, '\\') + 1), ConfiguratorHelper::getValue(ConfigKey::NotificationNotifyAbout), true)
+            ) {
+                Notification::send(User::find(1), new NewOrder($order));
             }
         });
     }
