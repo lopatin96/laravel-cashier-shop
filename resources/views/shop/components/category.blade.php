@@ -1,5 +1,5 @@
 <div class="space-y-6 mt-6">
-    <div class="bg-white sm:rounded-lg shadow-sm overflow-hidden">
+    <div class="bg-white sm:rounded-lg shadow-sm">
         <div>
             <div class="flex justify-between">
                 <h2 class="pl-6 pt-6 text-xl font-semibold text-gray-700">
