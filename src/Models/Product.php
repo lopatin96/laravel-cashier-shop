@@ -52,9 +52,9 @@ class Product extends Model
         return $this->status === ProductStatus::Retired;
     }
 
-    public function scopeStatus($query, ProductStatus $status): void
+    public function scopeStatus($query, array|ProductStatus $status): void
     {
-        $query->where('status', $status);
+        $query->whereIn('status', is_array($status) ? $status : [$status]);
     }
 
     public function scopeWhereModel($query, string $model): void

@@ -56,9 +56,9 @@ class Order extends Model
         return $this->status === OrderStatus::Canceled;
     }
 
-    public function scopeStatus($query, OrderStatus $status): void
+    public function scopeStatus($query, array|OrderStatus $status): void
     {
-        $query->where('status', $status);
+        $query->whereIn('status', is_array($status) ? $status : [$status]);
     }
 
     public static function boot(): void
