@@ -28,15 +28,28 @@
         <hr class="opacity-90 mx-5">
 
         @if($canBePurchased)
-            <p class="text-xl font-bold text-center py-3">
-                {{
-                    Number::currency(
-                        $product->prices[$country] ?? $product->prices['us'],
-                        in: array_key_exists($country, $product->prices) && array_key_exists($country, config("laravel-cashier-shop.country_to_currency")) ? config("laravel-cashier-shop.country_to_currency")[$country] : 'USD',
-                        locale: $locale,
-                    )
-                }}
-            </p>
+            <div class="flex justify-center space-x-4 py-3 items-center">
+                @if($product->crossed_prices)
+                    <span class="text-gray-500 line-through">
+                        {{
+                            Number::currency(
+                                $product->crossed_prices[$country] ?? $product->crossed_prices['us'],
+                                in: array_key_exists($country, $product->crossed_prices) && array_key_exists($country, config("laravel-cashier-shop.country_to_currency")) ? config("laravel-cashier-shop.country_to_currency")[$country] : 'USD',
+                                locale: $locale,
+                            )
+                        }}
+                    </span>
+                @endif
+                <span class="text-xl font-bold">
+                    {{
+                        Number::currency(
+                            $product->prices[$country] ?? $product->prices['us'],
+                            in: array_key_exists($country, $product->prices) && array_key_exists($country, config("laravel-cashier-shop.country_to_currency")) ? config("laravel-cashier-shop.country_to_currency")[$country] : 'USD',
+                            locale: $locale,
+                        )
+                    }}
+                </span>
+            </div>
         @else
             <div class="flex items-center justify-center space-x-2 py-3 text-gray-500 select-none cursor-default">
                 <svg

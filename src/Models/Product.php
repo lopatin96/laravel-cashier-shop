@@ -24,6 +24,7 @@ class Product extends Model
     protected $casts = [
         'status' => ProductStatus::class,
         'prices' => 'array',
+        'crossed_prices' => 'array',
         'properties' => 'object',
     ];
 
