@@ -10,5 +10,5 @@ enum OrderStatus: string
 
     case Processed = 'processed';
 
-    case Canceled = 'Canceled';
+    case Canceled = 'canceled';
 }
