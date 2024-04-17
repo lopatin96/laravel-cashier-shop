@@ -46,6 +46,7 @@ class OrderController extends Controller
             'user_id' => auth()->id(),
             'product_id' => $product->id,
             'quantity' => $quantity,
+            'log' => $this->getLog(),
         ]);
 
         if (! $order) {
@@ -119,5 +120,18 @@ class OrderController extends Controller
         $order->update(['status' => OrderStatus::Canceled]);
 
         return redirect('/shop');
+    }
+
+    private function getLog(): array
+    {
+        $log = [];
+
+        if (request()->query()) {
+            $log = array_merge($log, request()->query());
+        }
+
+        return array_merge($log, [
+            'url_previous' => url()->previous(),
+        ]);
     }
 }
