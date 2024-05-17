@@ -19,7 +19,7 @@
 
         @if($product->properties->subtitle ?? false)
             <div class="px-5 pb-2">
-                <p class="text-gray-400 text-sm leading-4">
+                <p class="text-gray-500 text-sm leading-4">
                     {{ __("laravel-cashier-shop::shop.products.$product->category.$product->name.subtitle") }}
                 </p>
             </div>
