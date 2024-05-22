@@ -9,5 +9,7 @@ interface Product
 {
     public function process(Order $order): void;
 
-    public function canBePurchased(User $user): bool;
+    public function isListed(User $user): bool;
+
+    public function isPurchasable(User $user): bool;
 }
