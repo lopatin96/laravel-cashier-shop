@@ -76,8 +76,13 @@ class Product extends Model
             ->newInstanceWithoutConstructor();
     }
 
-    public function canBePurchased(User $user): bool
+    public function isListed(User $user): bool
     {
-        return $this->instance()?->canBePurchased($user) ?? true;
+        return $this->instance()?->isListed($user) ?? true;
+    }
+
+    public function isPurchasable(User $user): bool
+    {
+        return $this->instance()?->isPurchasable($user) ?? true;
     }
 }
