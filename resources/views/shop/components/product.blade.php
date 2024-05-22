@@ -20,55 +20,55 @@
                 <x-laravel-ui-components::tooltip text="{{ __('laravel-cashier-shop::shop.products.'. $product->category . '.' . $product->name . '.description') }}" />
             </div>
 
-            @if($product->properties->subtitle ?? false)
-                <div class="px-5 pb-2">
-                    <p class="text-gray-400 text-sm leading-4">
-                        {{ __("laravel-cashier-shop::shop.products.$product->category.$product->name.subtitle") }}
-                    </p>
-                </div>
-            @endif
+        @if($product->properties->subtitle ?? false)
+            <div class="px-5 pb-2">
+                <p class="text-gray-500 text-sm leading-4">
+                    {{ __("laravel-cashier-shop::shop.products.$product->category.$product->name.subtitle") }}
+                </p>
+            </div>
+        @endif
 
-            <hr class="opacity-90 mx-5">
+        <hr class="opacity-90 mx-5">
 
-            @if($isPurchasable)
-                <div class="flex justify-center space-x-4 py-3 items-center">
-                    @if($product->crossed_prices)
-                        <span class="text-gray-500 line-through">
-                            {{
-                                Number::currency(
-                                    $product->crossed_prices[$country] ?? $product->crossed_prices['us'],
-                                    in: array_key_exists($country, $product->crossed_prices) && array_key_exists($country, config("laravel-cashier-shop.country_to_currency")) ? config("laravel-cashier-shop.country_to_currency")[$country] : 'USD',
-                                    locale: $locale,
-                                )
-                            }}
-                        </span>
-                    @endif
-                    <span class="text-xl font-bold">
+        @if($isPurchasable)
+            <div class="flex justify-center space-x-4 py-3 items-center">
+                @if($product->crossed_prices)
+                    <span class="text-gray-500 line-through">
                         {{
                             Number::currency(
-                                $product->prices[$country] ?? $product->prices['us'],
-                                in: array_key_exists($country, $product->prices) && array_key_exists($country, config("laravel-cashier-shop.country_to_currency")) ? config("laravel-cashier-shop.country_to_currency")[$country] : 'USD',
+                                $product->crossed_prices[$country] ?? $product->crossed_prices['us'],
+                                in: array_key_exists($country, $product->crossed_prices) && array_key_exists($country, config("laravel-cashier-shop.country_to_currency")) ? config("laravel-cashier-shop.country_to_currency")[$country] : 'USD',
                                 locale: $locale,
                             )
                         }}
                     </span>
-                </div>
-            @else
-                <div class="flex items-center justify-center space-x-2 py-3 text-gray-500 select-none cursor-default">
-                    <svg
-                        class="shrink-0 size-4"
-                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"
-                    >
-                        <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                    </svg>
+                @endif
+                <span class="text-xl font-bold">
+                    {{
+                        Number::currency(
+                            $product->prices[$country] ?? $product->prices['us'],
+                            in: array_key_exists($country, $product->prices) && array_key_exists($country, config("laravel-cashier-shop.country_to_currency")) ? config("laravel-cashier-shop.country_to_currency")[$country] : 'USD',
+                            locale: $locale,
+                        )
+                    }}
+                </span>
+            </div>
+        @else
+            <div class="flex items-center justify-center space-x-2 py-3 text-gray-500 select-none cursor-default">
+                <svg
+                    class="shrink-0 size-4"
+                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"
+                >
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                </svg>
 
-                    <p class="text-lg font-semibold">
-                        {{ __('Purchased') }}
-                    </p>
+                <p class="text-lg font-semibold">
+                    {{ __('Purchased') }}
+                </p>
 
-                </div>
-            @endif
-        </div>
+            </div>
+        @endif
+    </div>
 
         <div
             class="flex md:flex-col lg:flex-row xl:flex-col justify-between items-end space-x-4 md:space-x-0 lg:space-x-4 xl:space-x-0 md:space-y-2 lg:space-y-0 xl:space-y-2"
