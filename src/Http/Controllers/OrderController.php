@@ -31,7 +31,7 @@ class OrderController extends Controller
             ]);
         }
 
-        if (! $product->canBePurchased(auth()->user())) {
+        if (! $product->isPurchasable(auth()->user())) {
             return redirect('/shop')->with([
                 'flash.banner' => __('An error has occurred. You have already purchased this product.'),
                 'flash.bannerStyle' => 'danger',
