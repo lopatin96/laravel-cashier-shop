@@ -1,6 +1,6 @@
 # Install
 ###
-Create ```/app/View/Components/ShopLayout.php```.
+Create ```app/View/Components/ShopLayout.php```.
 ```php
 <?php
 
@@ -17,6 +17,9 @@ class ShopLayout extends Component
     }
 }
 ```
+
+###
+Create ```resources/views/layouts/shop.blade.php```.
 
 ### Trait
 Add ```HasOrders``` trait to User model.
