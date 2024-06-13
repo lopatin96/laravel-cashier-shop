@@ -14,13 +14,30 @@ class User extends Authenticatable
 Create ```app/Products``` directory and TestProduct class:
 
 ```php
+<?php
+
+namespace App\Products;
+
+use App\Models\User;
+use Atin\LaravelCashierShop\Interfaces\Product;
 use Atin\LaravelCashierShop\Models\Order;
 
-class TestProduct extends Product
+class TestProduct implements Product
 {
-    protected function run(Order $order): void
+
+    public function process(Order $order): void
     {
-         $order->user->config->…
+        // TODO: Implement process() method.
+    }
+
+    public function isListed(User $user): bool
+    {
+        // TODO: Implement isListed() method.
+    }
+
+    public function isPurchasable(User $user): bool
+    {
+        // TODO: Implement isPurchasable() method.
     }
 }
 ```
