@@ -20,7 +20,7 @@ class TestProduct extends Product
 {
     protected function run(Order $order): void
     {
-         $order->user->config->...
+         $order->user->config->…
     }
 }
 ```
