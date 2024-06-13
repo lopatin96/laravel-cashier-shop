@@ -11,7 +11,7 @@ class User extends Authenticatable
 ```
 
 ### Products
-Create ```app/Products``` directory and Campaign class:
+Create ```app/Products``` directory and TestProduct class:
 
 ```php
 use Atin\LaravelCashierShop\Models\Order;
@@ -20,7 +20,7 @@ class TestProduct extends Product
 {
     protected function run(Order $order): void
     {
-         $order->user->config->forceU
+         $order->user->config->...
     }
 }
 ```
