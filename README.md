@@ -22,7 +22,7 @@ class ShopLayout extends Component
 Create ```resources/views/layouts/shop.blade.php```.
 
 ### Trait
-Add ```HasOrders``` trait to User model.
+Add ```HasOrders``` trait and cast to User model.
 
 ```php
 use Atin\LaravelCashierShop\Traits\HasOrders;
@@ -30,6 +30,12 @@ use Atin\LaravelCashierShop\Traits\HasOrders;
 class User extends Authenticatable
 {
     use HasOrders;
+
+    protected $casts = [
+        …
+        'shop_visited_at' => 'datetime',
+    ];
+ 
 ```
 
 ### Products
