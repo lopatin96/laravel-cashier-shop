@@ -18,8 +18,8 @@ return [
 
     'categories.category-name.title' => 'Category Name',
 
-    'categories.quantity.add.tooltip' => 'Add a copy of the item',
-    'categories.quantity.remove.tooltip' => 'Remove a copy of the item',
+    'product.quantity.more.tooltip' => 'One more',
+    'product.quantity.less.tooltip' => 'One less',
 
     'products.category-name.product-name.title' => '',
     'products.category-name.product-name.description' => '',
