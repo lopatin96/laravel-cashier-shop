@@ -14,11 +14,23 @@ class OrderController extends Controller
     public function index()
     {
         return view('laravel-cashier-shop::shop.index', [
-            'productsByCategory' => Product::status(ProductStatus::Deployed)->orderBy('sort_order')->get()->reduce(static function($carry, $item) {
-                $carry[$item->category][] = $item;
+            'productsByCategory' => Product::status(ProductStatus::Deployed)
+                ->orderBy('sort_order')
+                ->get()
+                ->reduce(static function($carry, $item) {
+                    $carry[$item->category][] = $item;
 
-                return $carry;
-            }),
+                    return $carry;
+                }),
+            'paidOrders' => auth()->user()
+                ->orders()
+                ->with('product')
+                ->whereIn('status', [OrderStatus::Completed, OrderStatus::Processed])
+                ->latest()
+                ->paginate(
+                    perPage: 5,
+                    pageName: 'orders',
+                ),
         ]);
     }
 
@@ -94,7 +106,7 @@ class OrderController extends Controller
         $order->update(['status' => OrderStatus::Completed]);
 
         return redirect('/shop')->with([
-            'flash.banner' => __('The payment was successful. You have purchased the product.'),
+            'flash.banner' => __('laravel-cashier-shop::shop.alerts.success'),
             'flash.bannerStyle' => 'success',
         ]);
     }

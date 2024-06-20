@@ -6,18 +6,9 @@
 
     <x-banner />
 
-    @if($productsByCategory)
-        @foreach($productsByCategory as $category => $products)
-            @include('laravel-cashier-shop::shop.components.category', [
-                'category' => $category,
-                'products' => $products,
-            ])
-        @endforeach
-    @else
-        <p class="text-center">
-            {{ __('No products yet') }}
-        </p>
-    @endif
+    @include('laravel-cashier-shop::shop.components.products', ['productsByCategory' => $productsByCategory])
+
+    @include('laravel-cashier-shop::shop.components.order-history', ['orders' => $paidOrders])
 
     <script>
         const urlParams = new URLSearchParams(window.location.search);
@@ -48,8 +39,6 @@
                         behavior: 'smooth',
                     });
                 }
-
-
             });
         }
     </script>
