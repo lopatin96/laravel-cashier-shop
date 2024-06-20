@@ -18,6 +18,9 @@ return [
 
     'categories.category-name.title' => 'Category Name',
 
+    'categories.quantity.add.tooltip' => 'Add a copy of the item',
+    'categories.quantity.remove.tooltip' => 'Remove a copy of the item',
+
     'products.category-name.product-name.title' => '',
     'products.category-name.product-name.description' => '',
     'products.category-name.product-name.subtitle' => '',
