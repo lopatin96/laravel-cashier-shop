@@ -91,6 +91,7 @@
                             <button
                                 x-on:click="quantity = quantity > 1 ? parseInt(quantity)-1 : 1"
                                 type="button" class="size-6 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-md border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
+                                title="{{ __('laravel-cashier-shop::shop.product.quantity.less.tooltip') }}"
                             >
                                 <svg class="flex-shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/></svg>
                             </button>
@@ -102,6 +103,7 @@
                             <button
                                 x-on:click="quantity = quantity < max_quantity ? parseInt(quantity)+1 : parseInt(max_quantity)"
                                 type="button" class="size-6 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-md border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
+                                title="{{ __('laravel-cashier-shop::shop.product.quantity.more.tooltip') }}"
                             >
                                 <svg class="flex-shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
                             </button>
