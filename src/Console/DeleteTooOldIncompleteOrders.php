@@ -16,6 +16,6 @@ class DeleteTooOldIncompleteOrders
     {
         Order::status(OrderStatus::Incomplete)
             ->whereDate('created_at', '<', now()->subDays($this->days))
-            ->delete();
+            ->forceDelete();
     }
 }
