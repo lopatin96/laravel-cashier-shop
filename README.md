@@ -73,13 +73,13 @@ class TestProduct implements Product
 ### Console
 Add ```DeleteTooOldIncompleteOrders``` to ```app/Console/Kernel.php```
 ```php
-use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Atin\LaravelSubscription\Console\IncompleteSubscriptions;
 
 class Kernel extends ConsoleKernel
 {
     protected function schedule(Schedule $schedule): void
     {
-        $schedule->call(new DeleteLinksThatWereLastClickedTooLongAgo)->daily();
+        $schedule->call(new DeleteTooOldIncompleteOrders)->daily();
 ```
 
 # Publishing
