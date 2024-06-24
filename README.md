@@ -73,7 +73,7 @@ class TestProduct implements Product
 ### Console
 Add ```DeleteTooOldIncompleteOrders``` to ```app/Console/Kernel.php```
 ```php
-use Atin\LaravelSubscription\Console\IncompleteSubscriptions;
+use Atin\LaravelCashierShop\Console\DeleteTooOldIncompleteOrders;
 
 class Kernel extends ConsoleKernel
 {
