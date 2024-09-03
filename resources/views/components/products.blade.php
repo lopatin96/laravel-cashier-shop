@@ -1,6 +1,6 @@
 @if($productsByCategory)
     @foreach($productsByCategory as $category => $products)
-        @include('laravel-cashier-shop::shop.components.category', [
+        @include('laravel-cashier-shop::components.category', [
             'category' => $category,
             'products' => $products,
         ])

@@ -6,9 +6,9 @@
 
     <x-banner />
 
-    @include('laravel-cashier-shop::shop.components.products', ['productsByCategory' => $productsByCategory])
+    @include('laravel-cashier-shop::components.products', ['productsByCategory' => $productsByCategory])
 
-    @include('laravel-cashier-shop::shop.components.order-history', ['orders' => $paidOrders])
+    @include('laravel-cashier-shop::components.order-history', ['orders' => $paidOrders])
 
     <script>
         const urlParams = new URLSearchParams(window.location.search);
