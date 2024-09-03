@@ -1,5 +1,5 @@
 @if($orders->isNotEmpty())
-    <x-laravel-affiliate-program::basic-section title="{{ __('laravel-cashier-shop::shop.order-history.title') }}">
+    <x-laravel-order-history::basic-section title="{{ __('laravel-cashier-shop::shop.order-history.title') }}">
         <table class="min-w-full text-center font-light mt-2">
             <thead class="border-b bg-neutral-50 font-medium dark:border-neutral-500 dark:text-neutral-800">
             <tr>
@@ -24,5 +24,5 @@
                 {{ $orders->links() }}
             </div>
         @endif
-    </x-laravel-affiliate-program::basic-section>
+    </x-laravel-order-history::basic-section>
 @endif
