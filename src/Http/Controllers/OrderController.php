@@ -105,7 +105,7 @@ class OrderController extends Controller
 
         $order->update(['status' => OrderStatus::Completed]);
 
-        return redirect('/shop')->with([
+        return redirect('/shop?status=success')->with([
             'flash.banner' => __('laravel-cashier-shop::shop.alerts.success'),
             'flash.bannerStyle' => 'success',
         ]);
