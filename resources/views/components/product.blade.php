@@ -33,7 +33,7 @@
         @if($isPurchasable)
             <div class="flex justify-center space-x-4 py-3 items-center">
                 @if($product->crossed_prices)
-                    <span class="text-gray-500 line-through">
+                    <span class="text-gray-500 px-1.5 relative">
                         {{
                             Number::currency(
                                 $product->crossed_prices[$country] ?? $product->crossed_prices['us'],
@@ -41,6 +41,7 @@
                                 locale: $locale,
                             )
                         }}
+                        <span class="absolute left-0 right-0 top-1/2 transform -translate-y-1/2 -rotate-12 h-0.5 bg-red-600"></span>
                     </span>
                 @endif
                 <span class="text-xl font-bold">
