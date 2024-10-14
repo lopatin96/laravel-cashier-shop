@@ -28,16 +28,20 @@
                 iterations: 3,
             };
 
+            let isFirst = true;
+
             focuses.split(",").forEach(function(focus) {
                 const product = document.querySelector("[data-product='" + focus + "'] [data-product-body]");
 
-                if (product) {
-                    product.animate(keyframes, options);
+                product.animate(keyframes, options);
 
+                if (isFirst && product) {
                     window.scrollBy({
                         top: product.getBoundingClientRect().top -50,
                         behavior: 'smooth',
                     });
+
+                    isFirst = false;
                 }
             });
         }
