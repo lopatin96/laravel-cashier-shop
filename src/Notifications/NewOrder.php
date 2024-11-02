@@ -34,12 +34,8 @@ class NewOrder extends Notification implements ShouldQueue
             $additionalUserInfo .= $additionalUserInfo ? ' · '.$this->order->user->country : $this->order->user->country;
         }
 
-        if ($this->order->user->variant) {
-            $additionalUserInfo .= $additionalUserInfo ? ' · '.$this->order->user->variant : $this->order->user->variant;
-        }
-
-        if ($this->order->user->keyword) {
-            $additionalUserInfo .= $additionalUserInfo ? ' · '.$this->order->user->keyword : $this->order->user->keyword;
+        if ($this->order->user->device) {
+            $additionalUserInfo .= $additionalUserInfo ? ' · '.$this->order->user->device : $this->order->user->device;
         }
 
         return TelegramMessage::create()
