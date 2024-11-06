@@ -11,7 +11,7 @@ return [
     'Return to' => 'Retourner à',
 
     'info-title' => 'Acheter des produits',
-    'info-text-0' => '<p>Voici une liste de tous les produits que vous pouvez acheter individuellement. Vous pouvez également <a href="/billing" target="_blank" class="underline hover:no-underline">vous abonner</a> et recevoir 300K jetons supplémentaires chaque mois ainsi que des fonctionnalités exclusives.</p>',
+    'info-text-0' => '<p>Voici une liste de tous les produits que vous pouvez acheter individuellement. Vous pouvez également <a href="/billing" target="_blank" class="underline hover:no-underline">vous abonner pour des tarifs avantageux</a> avec notre plan mensuel.</p>',
     'info-text-1' => '<p>Voici une liste de tous les produits que vous pouvez acheter individuellement.</p>',
 
     'alerts.success' => 'Le paiement a été effectué avec succès, vous avez acheté le produit. Vous pouvez <a href="/dashboard" class="underline hover:no-underline">retourner au service</a> ou rester dans la boutique.',

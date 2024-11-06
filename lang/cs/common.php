@@ -11,7 +11,7 @@ return [
     'Return to' => 'Vrátit se na',
 
     'info-title' => 'Kupte produkty',
-    'info-text-0' => '<p>Níže je seznam všech produktů, které si můžete zakoupit jednotlivě. Můžete se také <a href="/billing" target="_blank" class="underline hover:no-underline">předplatit</a> a každý měsíc získat 300K dalších tokenů a některé jedinečné funkce.</p>',
+    'info-text-0' => '<p>Níže je seznam všech produktů, které si můžete zakoupit jednotlivě. Můžete se také <a href="/billing" target="_blank" class="underline hover:no-underline">přihlásit k odběru za výhodnější ceny</a> s naším měsíčním plánem.</p>',
     'info-text-1' => '<p>Níže je seznam všech produktů, které si můžete zakoupit jednotlivě.</p>',
 
     'alerts.success' => 'Platba byla úspěšná, produkt byl zakoupen. Můžete <a href="/dashboard" class="underline hover:no-underline">se vrátit na službu</a> nebo zůstat v obchodě.',

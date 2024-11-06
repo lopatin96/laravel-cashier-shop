@@ -11,7 +11,7 @@ return [
     'Return to' => 'Vissza',
 
     'info-title' => 'Termékek vásárlása',
-    'info-text-0' => '<p>Az alábbiakban található a lista az összes termékről, amelyet külön-külön vásárolhatsz meg. Emellett <a href="/billing" target="_blank" class="underline hover:no-underline">elő is fizethet</a>, és havonta 300 ezer további tokent és néhány egyedi funkciót kaphat.</p>',
+    'info-text-0' => '<p>Az alábbiakban található a lista az összes termékről, amelyet külön-külön vásárolhatsz meg. Emellett <a href="/billing" target="_blank" class="underline hover:no-underline">feliratkozhat kedvezőbb árakért</a> havi előfizetési csomagunkra.</p>',
     'info-text-1' => '<p>Az alábbiakban található a lista az összes termékről, amelyet külön-külön vásárolhatsz meg.</p>',
 
     'alerts.success' => 'A fizetés sikeres volt, megvásároltad a terméket. <a href="/dashboard" class="underline hover:no-underline">Visszatérhetsz a szolgáltatáshoz</a> vagy maradhatsz a boltban.',

@@ -11,7 +11,7 @@ return [
     'Return to' => 'Återvänd till',
 
     'info-title' => 'Köp produkter',
-    'info-text-0' => '<p>Nedan finns en lista över alla produkter du kan köpa individuellt. Du kan också <a href="/billing" target="_blank" class="underline hover:no-underline">prenumerera</a> och få 300K extra tokens varje månad samt några unika funktioner.</p>',
+    'info-text-0' => '<p>Nedan finns en lista över alla produkter du kan köpa individuellt. Du kan också <a href="/billing" target="_blank" class="underline hover:no-underline">prenumerera för bättre priser</a> med vårt månadsplan.</p>',
     'info-text-1' => '<p>Nedan finns en lista över alla produkter du kan köpa individuellt.</p>',
 
     'alerts.success' => 'Betalningen lyckades, du har köpt produkten. Du kan <a href="/dashboard" class="underline hover:no-underline">återvända till tjänsten</a> eller stanna i butiken.',

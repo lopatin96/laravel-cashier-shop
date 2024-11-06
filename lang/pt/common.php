@@ -11,7 +11,7 @@ return [
     'Return to' => 'Voltar para',
 
     'info-title' => 'Comprar produtos',
-    'info-text-0' => '<p>Abaixo está uma lista de todos os produtos que você pode comprar individualmente. Você também pode <a href="/billing" target="_blank" class="underline hover:no-underline">assinar</a> e receber 300K tokens adicionais todos os meses e algumas funcionalidades exclusivas.</p>',
+    'info-text-0' => '<p>Abaixo está uma lista de todos os produtos que você pode comprar individualmente. Você também pode <a href="/billing" target="_blank" class="underline hover:no-underline">assinar para obter melhores tarifas</a> com nosso plano mensal.</p>',
     'info-text-1' => '<p>Abaixo está uma lista de todos os produtos que você pode comprar individualmente.</p>',
 
     'alerts.success' => 'O pagamento foi bem-sucedido, você comprou o produto. Você pode <a href="/dashboard" class="underline hover:no-underline">voltar ao serviço</a> ou permanecer na loja.',

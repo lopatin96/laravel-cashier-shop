@@ -11,7 +11,7 @@ return [
     'Return to' => 'Wróć do',
 
     'info-title' => 'Zakup dodatków',
-    'info-text-0' => '<p>Poniżej znajduje się lista wszystkich produktów, które możesz zakupić pojedynczo. Możesz również <a href="/billing" target="_blank" class="underline hover:no-underline">wykupić subskrypcję</a> i co miesiąc otrzymywać 300K dodatkowych tokenów oraz kilka unikalnych funkcji.</p>',
+    'info-text-0' => '<p>Poniżej znajduje się lista wszystkich produktów, które możesz zakupić pojedynczo. Możesz również <a href="/billing" target="_blank" class="underline hover:no-underline">subskrybować, aby uzyskać lepsze stawki</a> w naszym miesięcznym planie.</p>',
     'info-text-1' => '<p>Poniżej znajduje się lista wszystkich produktów, które możesz zakupić pojedynczo.</p>',
 
     'alerts.success' => 'Płatność przebiegła pomyślnie, produkt został zakupiony. Możesz <a href="/dashboard" class="underline hover:no-underline">wrócić do serwisu</a> lub pozostać w sklepie.',

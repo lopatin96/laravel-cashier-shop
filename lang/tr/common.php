@@ -11,7 +11,7 @@ return [
     'Return to' => 'Geri dön',
 
     'info-title' => 'Ürünleri Satın Al',
-    'info-text-0' => '<p>Aşağıda, ayrı ayrı satın alabileceğiniz tüm ürünlerin bir listesi bulunmaktadır. Ayrıca <a href="/billing" target="_blank" class="underline hover:no-underline">abonelik</a> yapabilir ve her ay 300K ek token alabilir ve bazı benzersiz özelliklere sahip olabilirsiniz.</p>',
+    'info-text-0' => '<p>Aşağıda, ayrı ayrı satın alabileceğiniz tüm ürünlerin bir listesi bulunmaktadır. Ayrıca <a href="/billing" target="_blank" class="underline hover:no-underline">daha iyi fiyatlar için abone olabilirsiniz</a> aylık planımızla.</p>',
     'info-text-1' => '<p>Aşağıda, ayrı ayrı satın alabileceğiniz tüm ürünlerin bir listesi bulunmaktadır.</p>',
 
     'alerts.success' => 'Ödeme başarılı oldu, ürünü satın aldınız. <a href="/dashboard" class="underline hover:no-underline">Hizmete geri dön</a> veya mağazada kalabilirsiniz.',

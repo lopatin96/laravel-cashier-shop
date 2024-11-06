@@ -11,7 +11,7 @@ return [
     'Return to' => 'Palata',
 
     'info-title' => 'Osta tuotteita',
-    'info-text-0' => '<p>Alla on luettelo kaikista tuotteista, jotka voit ostaa erikseen. Voit myös <a href="/billing" target="_blank" class="underline hover:no-underline">tilata</a> ja saada 300K lisätokeneita joka kuukausi sekä joitakin ainutlaatuisia ominaisuuksia.</p>',
+    'info-text-0' => '<p>Alla on luettelo kaikista tuotteista, jotka voit ostaa erikseen. Voit myös <a href="/billing" target="_blank" class="underline hover:no-underline">tilata kuukausisuunnitelmamme edullisempaan hintaan</a>.</p>',
     'info-text-1' => '<p>Alla on luettelo kaikista tuotteista, jotka voit ostaa erikseen.</p>',
 
     'alerts.success' => 'Maksu onnistui, olet ostanut tuotteen. Voit <a href="/dashboard" class="underline hover:no-underline">palata palveluun</a> tai jäädä kauppaan.',

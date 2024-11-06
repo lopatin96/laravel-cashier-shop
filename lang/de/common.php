@@ -11,7 +11,7 @@ return [
     'Return to' => 'Zurückkehren zu',
 
     'info-title' => 'Produkte kaufen',
-    'info-text-0' => '<p>Unten finden Sie eine Liste aller Produkte, die Sie einzeln kaufen können. Sie können auch ein <a href="/billing" target="_blank" class="underline hover:no-underline">Abonnement</a> abschließen und jeden Monat 300.000 zusätzliche Tokens sowie einige einzigartige Funktionen erhalten.</p>',
+    'info-text-0' => '<p>Unten finden Sie eine Liste aller Produkte, die Sie einzeln kaufen können. Sie können sich auch für ein <a href="/billing" target="_blank" class="underline hover:no-underline">Abonnement zu besseren Konditionen</a> mit unserem monatlichen Plan entscheiden.</p>',
     'info-text-1' => '<p>Unten finden Sie eine Liste aller Produkte, die Sie einzeln kaufen können.</p>',
 
     'alerts.success' => 'Die Zahlung war erfolgreich, das Produkt wurde gekauft. Sie können <a href="/dashboard" class="underline hover:no-underline">zum Dienst zurückkehren</a> oder im Shop bleiben.',

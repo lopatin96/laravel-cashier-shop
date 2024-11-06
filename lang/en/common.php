@@ -11,7 +11,7 @@ return [
     'Return to' => 'Return to',
 
     'info-title' => 'Purchase products',
-    'info-text-0' => '<p>Below is a list of all the products you can purchase individually. You can also <a href="/billing" target="_blank" class="underline hover:no-underline">subscribe</a> and receive 300K additional tokens every month and some unique features.</p>',
+    'info-text-0' => '<p>Below is a list of all the products you can purchase individually. You can also <a href="/billing" target="_blank" class="underline hover:no-underline">subscribe for better rates</a> with our monthly plan.</p>',
     'info-text-1' => '<p>Below is a list of all the products you can purchase individually.</p>',
 
     'alerts.success' => 'The payment was successful, you purchased the product. You can <a href="/dashboard" class="underline hover:no-underline">return to the service</a> or stay in the store.',
