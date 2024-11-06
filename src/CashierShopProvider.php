@@ -31,13 +31,12 @@ class CashierShopProvider extends ServiceProvider
             __DIR__.'/../lang' => $this->app->langPath('vendor/laravel-cashier-shop'),
         ], 'laravel-cashier-shop-lang');
 
-
         $this->publishes([
             __DIR__.'/../resources/views' => resource_path('views/vendor/laravel-cashier-shop')
         ], 'laravel-cashier-shop-views');
 
         $this->publishes([
-            __DIR__.'/../config/config.php' => config_path('laravel-cashier-shop.php')
+            __DIR__.'/../config/config.php' => config_path('laravel-cashier-common.php')
         ], 'laravel-cashier-shop-config');
     }
 }

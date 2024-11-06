@@ -15,15 +15,15 @@
         >
             <div class="flex justify-between space-x-2 px-5 py-3">
                 <p class="text-gray-800 font-semibold leading-5">
-                    {{ __("laravel-cashier-shop::shop.products.$product->category.$product->name.title") }}
+                    {{ __("laravel-cashier-shop::specific.products.$product->category.$product->name.title") }}
                 </p>
-                <x-laravel-ui-components::tooltip text="{{ __('laravel-cashier-shop::shop.products.'. $product->category . '.' . $product->name . '.description') }}" />
+                <x-laravel-ui-components::tooltip text="{{ __('laravel-cashier-shop::specific.products.'. $product->category . '.' . $product->name . '.description') }}" />
             </div>
 
         @if($product->properties->subtitle ?? false)
             <div class="px-5 pb-2">
                 <p class="text-gray-500 text-sm leading-4">
-                    {{ __("laravel-cashier-shop::shop.products.$product->category.$product->name.subtitle") }}
+                    {{ __("laravel-cashier-shop::specific.products.$product->category.$product->name.subtitle") }}
                 </p>
             </div>
         @endif
@@ -92,7 +92,7 @@
                             <button
                                 x-on:click="quantity = quantity > 1 ? parseInt(quantity)-1 : 1"
                                 type="button" class="size-6 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-md border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
-                                title="{{ __('laravel-cashier-shop::shop.product.quantity.less.tooltip') }}"
+                                title="{{ __('laravel-cashier-shop::common.product.quantity.less.tooltip') }}"
                             >
                                 <svg class="flex-shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/></svg>
                             </button>
@@ -104,7 +104,7 @@
                             <button
                                 x-on:click="quantity = quantity < max_quantity ? parseInt(quantity)+1 : parseInt(max_quantity)"
                                 type="button" class="size-6 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-md border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
-                                title="{{ __('laravel-cashier-shop::shop.product.quantity.more.tooltip') }}"
+                                title="{{ __('laravel-cashier-shop::common.product.quantity.more.tooltip') }}"
                             >
                                 <svg class="flex-shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
                             </button>
@@ -119,7 +119,7 @@
                     class="shrink-0"
                 >
                     <x-button type="button">
-                        {{ __('Buy Now') }}
+                        {{ __('laravel-cashier-shop::common.buttons.buy.title') }}
                     </x-button>
                 </a>
             @endif

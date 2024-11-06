@@ -3,7 +3,7 @@
         <div>
             <div class="flex justify-between">
                 <h2 class="pl-6 pt-6 text-xl font-semibold text-gray-700">
-                    {{ __("laravel-cashier-shop::shop.categories.$category.title") }}
+                    {{ __("laravel-cashier-shop::specific.categories.$category.title") }}
                 </h2>
             </div>
 
