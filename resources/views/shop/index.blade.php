@@ -33,9 +33,13 @@
             focuses.split(",").forEach(function(focus) {
                 const product = document.querySelector("[data-product='" + focus + "'] [data-product-body]");
 
+                if (!product) {
+                    return;
+                }
+
                 product.animate(keyframes, options);
 
-                if (isFirst && product) {
+                if (isFirst) {
                     window.scrollBy({
                         top: product.getBoundingClientRect().top -50,
                         behavior: 'smooth',
