@@ -4,7 +4,7 @@
         $locale = auth()->user()->locale ?? 'en';
     @endphp
 
-    <x-banner />
+    <x-banner/>
 
     @include('laravel-cashier-shop::components.products', ['productsByCategory' => $productsByCategory])
 
@@ -16,11 +16,11 @@
 
         if (focuses) {
             const keyframes = [
-                { backgroundColor: "#f0fdf4" },
-                { transform: "scale(1.05)" },
-                { backgroundColor: "#bbf7d0" },
-                { transform: "scale(1)" },
-                { backgroundColor: "#f0fdf4" },
+                {backgroundColor: "#f0fdf4"},
+                {transform: "scale(1.05)"},
+                {backgroundColor: "#bbf7d0"},
+                {transform: "scale(1)"},
+                {backgroundColor: "#f0fdf4"},
             ];
 
             const options = {
@@ -30,7 +30,7 @@
 
             let isFirst = true;
 
-            focuses.split(",").forEach(function(focus) {
+            focuses.split(",").forEach(function (focus) {
                 const product = document.querySelector("[data-product='" + focus + "'] [data-product-body]");
 
                 if (!product) {
@@ -41,7 +41,7 @@
 
                 if (isFirst) {
                     window.scrollBy({
-                        top: product.getBoundingClientRect().top -50,
+                        top: product.getBoundingClientRect().top - 50,
                         behavior: 'smooth',
                     });
 
