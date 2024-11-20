@@ -8,6 +8,9 @@ use Atin\LaravelCashierShop\Models\Order;
 use Atin\LaravelCashierShop\Models\Product;
 use Illuminate\Http\Request;
 use Laravel\Cashier\Cashier;
+use Laravel\Cashier\Exceptions\IncompletePayment;
+use Illuminate\Support\Facades\Storage;
+
 
 class OrderController extends Controller
 {
@@ -68,13 +71,40 @@ class OrderController extends Controller
             ]);
         }
 
-        return $request->user()->checkout([
-            $product->price_id => $quantity,
-        ], [
+        $productData = [
+            'description' => __("laravel-cashier-shop::specific.products.$product->category.$product->name.subtitle"),
+            'metadata' => [
+//                'category' => 'electronics',
+            ]
+        ];
+
+        if ($product->image) {
+            $productData['images'] = [Storage::disk('s3')->temporaryUrl($product->image, now()->addMinute())];
+        }
+
+        $sessionOptions = [
             'success_url' => route('checkout-success').'?session_id={CHECKOUT_SESSION_ID}',
             'cancel_url' => route('checkout-cancel').'?session_id={CHECKOUT_SESSION_ID}',
             'metadata' => ['order_id' => $order->id],
-        ]);
+        ];
+
+        try {
+            return $request->user()->checkout([[
+                'price_data' => [
+                    'currency' => $request->user()->getCurrency()->iso_code,
+                    'product_data' => array_merge($productData, [
+                        'name' => __("laravel-cashier-shop::specific.products.$product->category.$product->name.title"),
+                    ]),
+                    'unit_amount' => $product->getPrice($request->user()),
+                ],
+                'quantity' => $quantity,
+            ]], $sessionOptions);
+        } catch (IncompletePayment) {
+            return redirect('/shop')->with([
+                'flash.banner' => __('An error has occurred. Please try again after some time.'),
+                'flash.bannerStyle' => 'danger',
+            ]);
+        }
     }
 
     public function success(Request $request)

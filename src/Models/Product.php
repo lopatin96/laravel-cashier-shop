@@ -2,6 +2,7 @@
 
 namespace Atin\LaravelCashierShop\Models;
 
+use Atin\LaravelCashierShop\Enums\CurrencyDecimalType;
 use Atin\LaravelCashierShop\Enums\ProductStatus;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -99,14 +100,29 @@ class Product extends Model
 
     public function getDisplayPrice(User $user): string
     {
-        return Number::currency(static::getPrice($user), in: $user->getCurrency()->iso_code, locale: $user->locale);
+        $currency = $user->getCurrency();
+
+        return Number::currency(
+            $currency->decimal_type === CurrencyDecimalType::TWO_DECIMAL
+                ? $this->getPrice($user) / 100
+                : $this->getPrice($user),
+            in: $currency->iso_code,
+            locale: $user->locale
+        );
     }
 
     public function getDisplayCrossedPrice(User $user): ?string
     {
         if ($crossedPrice = $this->getCrossedPrice($user)) {
-            return Number::currency(static::getPrice($user), in: $user->getCurrency()->iso_code, locale: $user->locale);
-        }
+            $currency = $user->getCurrency();
+
+            return Number::currency(
+                $currency->decimal_type === CurrencyDecimalType::TWO_DECIMAL
+                    ? $this->getPrice($user) / 100
+                    : $this->getPrice($user),
+                in: $currency->iso_code,
+                locale: $user->locale
+            );        }
 
         return null;
     }
