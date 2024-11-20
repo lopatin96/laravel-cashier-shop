@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use ReflectionException;
 use Veelasky\LaravelHashId\Eloquent\HashableId;
 use App\Models\User;
+use Illuminate\Support\Number;
 
 class Product extends Model
 {
@@ -84,5 +85,29 @@ class Product extends Model
     public function isPurchasable(User $user): bool
     {
         return $this->instance()?->isPurchasable($user) ?? true;
+    }
+
+    public function getPrice(User $user): int
+    {
+        return $this->instance()?->getPrice($user);
+    }
+
+    public function getCrossedPrice(User $user): int
+    {
+        return $this->instance()?->getCrossedPrice($user);
+    }
+
+    public function getDisplayPrice(User $user): string
+    {
+        return Number::currency(static::getPrice($user), in: $user->getCurrency()->iso_code, locale: $user->locale);
+    }
+
+    public function getDisplayCrossedPrice(User $user): ?string
+    {
+        if ($crossedPrice = $this->getCrossedPrice($user)) {
+            return Number::currency(static::getPrice($user), in: $user->getCurrency()->iso_code, locale: $user->locale);
+        }
+
+        return null;
     }
 }

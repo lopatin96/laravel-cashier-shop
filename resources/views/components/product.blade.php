@@ -32,26 +32,14 @@
 
         @if($isPurchasable)
             <div class="flex justify-center space-x-4 py-3 items-center">
-                @if($product->crossed_prices)
+                @if($crossedPrice = $product->getDisplayCrossedPrice(auth()->user()))
                     <span class="text-gray-500 px-1 relative">
-                        {{
-                            Number::currency(
-                                $product->crossed_prices[$country] ?? $product->crossed_prices['us'],
-                                in: array_key_exists($country, $product->crossed_prices) && array_key_exists($country, config("laravel-cashier-shop.country_to_currency")) ? config("laravel-cashier-shop.country_to_currency")[$country] : 'USD',
-                                locale: $locale,
-                            )
-                        }}
+                        {{ $crossedPrice }}
                         <span class="absolute left-0 right-0 top-1/2 transform -translate-y-1/2 -rotate-12 h-0.5 bg-red-600 opacity-75"></span>
                     </span>
                 @endif
                 <span class="text-xl font-bold">
-                    {{
-                        Number::currency(
-                            $product->prices[$country] ?? $product->prices['us'],
-                            in: array_key_exists($country, $product->prices) && array_key_exists($country, config("laravel-cashier-shop.country_to_currency")) ? config("laravel-cashier-shop.country_to_currency")[$country] : 'USD',
-                            locale: $locale,
-                        )
-                    }}
+                    {{ $product->getDisplayPrice(auth()->user()) }}
                 </span>
             </div>
         @else

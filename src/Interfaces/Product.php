@@ -12,4 +12,8 @@ interface Product
     public function isListed(User $user): bool;
 
     public function isPurchasable(User $user): bool;
+
+    public function getPrice(User $user): int;
+
+    public function getCrossedPrice(User $user): int;
 }
