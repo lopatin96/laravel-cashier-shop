@@ -25,8 +25,6 @@ class Product extends Model
 
     protected $casts = [
         'status' => ProductStatus::class,
-        'prices' => 'array',
-        'crossed_prices' => 'array',
         'properties' => 'object',
     ];
 
@@ -93,7 +91,7 @@ class Product extends Model
         return $this->instance()?->getPrice($user);
     }
 
-    public function getCrossedPrice(User $user): int
+    public function getCrossedPrice(User $user): ?int
     {
         return $this->instance()?->getCrossedPrice($user);
     }
@@ -118,11 +116,12 @@ class Product extends Model
 
             return Number::currency(
                 $currency->decimal_type === CurrencyDecimalType::TWO_DECIMAL
-                    ? $this->getPrice($user) / 100
-                    : $this->getPrice($user),
+                    ? $crossedPrice / 100
+                    : $crossedPrice,
                 in: $currency->iso_code,
                 locale: $user->locale
-            );        }
+            );
+        }
 
         return null;
     }

@@ -2,7 +2,6 @@
 
 namespace Atin\LaravelCashierShop\Traits;
 
-
 use Atin\LaravelCashierShop\Models\Currency;
 use Atin\LaravelCashierShop\Helpers\CurrencyHelper;
 

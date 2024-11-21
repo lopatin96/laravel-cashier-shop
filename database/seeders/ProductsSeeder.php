@@ -3,6 +3,7 @@
 namespace Atin\LaravelCashierShop\Database\Seeders;
 
 use Atin\LaravelCashierShop\Enums\ProductStatus;
+use Atin\LaravelCashierShop\Models\Product;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -10,16 +11,16 @@ class ProductsSeeder extends Seeder
 {
     public function run(): void
     {
-        $data = [
-            [
-                'id' => 1,
-                'price_id' => 'price_1OwRWUDqujTYBNKvHtyBzOB1',
-                'status' => ProductStatus::Deployed,
-                'created_at' => date('Y-m-d H:i:s'),
-                'updated_at' => date('Y-m-d H:i:s'),
+        Product::create([
+            'category' => 'antiplagiarism',
+            'name' => '1-extra-check',
+            'status' => ProductStatus::Deployed,
+            'model' => 'Antiplagiarism1ExtraCheck',
+            'base_price' => 1000,
+            'properties' => [
+                'max_quantity' => 5,
+                'subtitle' => true,
             ],
-        ];
-
-        DB::table('Products')->insert($data);
+        ]);
     }
 }

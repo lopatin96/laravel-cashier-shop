@@ -15,5 +15,5 @@ interface Product
 
     public function getPrice(User $user): int;
 
-    public function getCrossedPrice(User $user): int;
+    public function getCrossedPrice(User $user): ?int;
 }

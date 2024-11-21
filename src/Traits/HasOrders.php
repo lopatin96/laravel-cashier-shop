@@ -2,7 +2,6 @@
 
 namespace Atin\LaravelCashierShop\Traits;
 
-
 use Atin\LaravelCashierShop\Models\Order;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
