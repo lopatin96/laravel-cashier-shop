@@ -57,11 +57,17 @@ class OrderController extends Controller
             ? 1
             : min($product->properties->max_quantity ?? 99, max(1, $quantity));
 
+        $currency = $request->user()->getCurrency();
+        $price = $product->getPrice($request->user());
+
         $order = Order::create([
             'user_id' => auth()->id(),
             'product_id' => $product->id,
             'quantity' => $quantity,
-            'log' => $this->getLog(),
+            'log' =>  array_merge($this->getLog(), [
+                'amount' => $price,
+                'currency' => $currency->iso_code,
+            ]),
         ]);
 
         if (! $order) {
@@ -74,7 +80,8 @@ class OrderController extends Controller
         $productData = [
             'description' => __("laravel-cashier-shop::specific.products.$product->category.$product->name.subtitle"),
             'metadata' => [
-//                'category' => 'electronics',
+                'name' => $product->name,
+                'category' => $product->category,
             ]
         ];
 
@@ -91,11 +98,11 @@ class OrderController extends Controller
         try {
             return $request->user()->checkout([[
                 'price_data' => [
-                    'currency' => $request->user()->getCurrency()->iso_code,
+                    'currency' => $currency->iso_code,
                     'product_data' => array_merge($productData, [
                         'name' => __("laravel-cashier-shop::specific.products.$product->category.$product->name.title"),
                     ]),
-                    'unit_amount' => $product->getPrice($request->user()),
+                    'unit_amount' => $price,
                 ],
                 'quantity' => $quantity,
             ]], $sessionOptions);
