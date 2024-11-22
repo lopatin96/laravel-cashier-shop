@@ -14,7 +14,7 @@ return new class extends Migration
             $table->char('iso_code', 3)->unique();
             $table->string('decimal_type');
             $table->integer('min_charge_amount')->nullable();
-            $table->json('country_codes')->nullable();
+            $table->json('country_codes');
             $table->timestamps();
         });
 

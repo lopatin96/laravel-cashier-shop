@@ -16,7 +16,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->string('price_id')->unique();
+            $table->string('price_id')->nullable()->unique();
         });
     }
 };
