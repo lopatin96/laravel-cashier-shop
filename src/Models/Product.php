@@ -100,12 +100,16 @@ class Product extends Model
     {
         $currency = $user->getCurrency();
 
-        return Number::currency(
-            $currency->decimal_type === CurrencyDecimalType::TWO_DECIMAL
-                ? $this->getPrice($user) / 100
-                : $this->getPrice($user),
-            in: $currency->iso_code,
-            locale: $user->locale
+        return preg_replace(
+            '/\.00\s?$/',
+            '',
+            Number::currency(
+                $currency->decimal_type === CurrencyDecimalType::TWO_DECIMAL
+                    ? $this->getPrice($user) / 100
+                    : $this->getPrice($user),
+                in: $currency->iso_code,
+                locale: $user->locale
+            )
         );
     }
 
@@ -114,12 +118,16 @@ class Product extends Model
         if ($crossedPrice = $this->getCrossedPrice($user)) {
             $currency = $user->getCurrency();
 
-            return Number::currency(
-                $currency->decimal_type === CurrencyDecimalType::TWO_DECIMAL
-                    ? $crossedPrice / 100
-                    : $crossedPrice,
-                in: $currency->iso_code,
-                locale: $user->locale
+            return preg_replace(
+                '/\.00\s?$/',
+                '',
+                Number::currency(
+                    $currency->decimal_type === CurrencyDecimalType::TWO_DECIMAL
+                        ? $crossedPrice / 100
+                        : $crossedPrice,
+                    in: $currency->iso_code,
+                    locale: $user->locale
+                )
             );
         }
 
