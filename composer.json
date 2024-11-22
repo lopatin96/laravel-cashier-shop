@@ -24,10 +24,7 @@
   ],
   "require": {
     "php": ">=8.1",
-    "lopatin96/laravel-ui-components": "^1.0",
-    "lopatin96/laravel-activitylog": "^1.0",
-    "veelasky/laravel-hashid": "*",
-    "lopatin96/laravel-configurator": "^1.0"
+    "veelasky/laravel-hashid": "*"
   },
   "require-dev": {
     "orchestra/testbench": "^8.0"
