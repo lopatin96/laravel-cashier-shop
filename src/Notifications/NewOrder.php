@@ -43,7 +43,7 @@ class NewOrder extends Notification implements ShouldQueue
             ->line((app()->isProduction() ? '' : 'TEST ').'*[New Order]*')
             ->line('_ID:_ '.$this->order->id)
             ->line('_Product:_ '.$this->order->product->name)
-            ->line('Price:_ '.$this->order->product->getDisplayPrice())
+            ->line('Price:_ '.$this->order->product->getDisplayPrice($this->order->user))
             ->line('_Quantity:_ '.$this->order->quantity)
             ->line('_User ID:_ '.$this->order->user->id)
             ->line('_User Email:_ '.$this->order->user->email)
