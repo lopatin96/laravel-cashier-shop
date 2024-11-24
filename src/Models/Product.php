@@ -7,13 +7,14 @@ use Atin\LaravelCashierShop\Enums\ProductStatus;
 use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Laravel\Nova\Actions\Actionable;
 use Veelasky\LaravelHashId\Eloquent\HashableId;
 use App\Models\User;
 use Illuminate\Support\Number;
 
 class Product extends Model
 {
-    use SoftDeletes, HashableId;
+    use Actionable, SoftDeletes, HashableId;
 
     protected $shouldHashPersist = true;
 
