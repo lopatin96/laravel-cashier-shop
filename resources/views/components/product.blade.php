@@ -17,7 +17,10 @@
                 <p class="text-gray-800 font-semibold leading-5">
                     {{ __("laravel-cashier-shop::specific.products.$product->category.$product->name.title") }}
                 </p>
-                <x-laravel-ui-components::tooltip text="{{ __('laravel-cashier-shop::specific.products.'. $product->category . '.' . $product->name . '.description') }}" />
+                <x-laravel-ui-components::tooltip
+                    text="{{ __('laravel-cashier-shop::specific.products.'. $product->category . '.' . $product->name . '.description') }}"
+                    position="left"
+                />
             </div>
 
         @if($product->properties->subtitle ?? false)
