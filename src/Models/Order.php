@@ -58,6 +58,11 @@ class Order extends Model
         return $this->status === OrderStatus::Canceled;
     }
 
+    public function getAmountInCents(): int
+    {
+        return $this->log->amount / config('laravel-cashier-shop.exchange_rates_for_usd')[$this->log->currency];
+    }
+
     public function scopeStatus($query, array|OrderStatus $status): void
     {
         $query->whereIn('status', is_array($status) ? $status : [$status]);
