@@ -2,18 +2,21 @@
 
 namespace Atin\LaravelCashierShop\Interfaces;
 
-use Atin\LaravelCashierShop\Models\Order;
 use App\Models\User;
 
-interface Product
+abstract class Product
 {
-    public function process(Order $order): void;
+    public function __construct(
+        protected User $user
+    ) {}
 
-    public function isListed(User $user): bool;
+    abstract public function process(): void;
 
-    public function isPurchasable(User $user): bool;
+    abstract public function isListed(): bool;
 
-    public function getPrice(User $user): int;
+    abstract public function isPurchasable(): bool;
 
-    public function getCrossedPrice(User $user): ?int;
+    abstract public function getPrice(): int;
+
+    abstract public function getCrossedPrice(): ?int;
 }

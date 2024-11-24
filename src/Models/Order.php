@@ -73,7 +73,7 @@ class Order extends Model
                 && $order->isDirty('status')
                 && $order->getOriginal('status') === OrderStatus::Incomplete
                 && $order->isCompleted()
-                && ($instance = $order->product->instance())
+                && ($instance = $order->product->instance($order->user))
             ) {
                 $instance->process($order);
 

@@ -4,9 +4,9 @@ namespace Atin\LaravelCashierShop\Models;
 
 use Atin\LaravelCashierShop\Enums\CurrencyDecimalType;
 use Atin\LaravelCashierShop\Enums\ProductStatus;
+use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use ReflectionException;
 use Veelasky\LaravelHashId\Eloquent\HashableId;
 use App\Models\User;
 use Illuminate\Support\Number;
@@ -64,36 +64,41 @@ class Product extends Model
     }
 
     /**
-     * @throws ReflectionException
+     * @throws Exception
      */
-    public function instance(): ?object
+    public function instance(User $user): ?object
     {
         if (! $this->model) {
             return null;
         }
 
-        return (new \ReflectionClass('App\\Products\\'.$this->model))
-            ->newInstanceWithoutConstructor();
+        $className = 'App\\Products\\' . $this->model;
+
+        if (! class_exists($className)) {
+            throw new \Exception("Class $className does not exist");
+        }
+
+        return (new \ReflectionClass($className))->newInstanceArgs([$user]);
     }
 
     public function isListed(User $user): bool
     {
-        return $this->instance()?->isListed($user) ?? true;
+        return $this->instance($user)?->isListed() ?? true;
     }
 
     public function isPurchasable(User $user): bool
     {
-        return $this->instance()?->isPurchasable($user) ?? true;
+        return $this->instance($user)?->isPurchasable() ?? true;
     }
 
     public function getPrice(User $user): int
     {
-        return $this->instance()?->getPrice($user);
+        return $this->instance($user)?->getPrice();
     }
 
     public function getCrossedPrice(User $user): ?int
     {
-        return $this->instance()?->getCrossedPrice($user);
+        return $this->instance($user)?->getCrossedPrice();
     }
 
     public function getDisplayPrice(User $user): string
