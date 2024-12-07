@@ -2,8 +2,8 @@
 
 namespace Atin\LaravelCashierShop\Models;
 
-use Atin\LaravelCashierShop\Enums\CurrencyDecimalType;
 use Atin\LaravelCashierShop\Enums\ProductStatus;
+use Atin\LaravelCashierShop\Helpers\PriceHelper;
 use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -104,37 +104,14 @@ class Product extends Model
 
     public function getDisplayPrice(User $user): string
     {
-        $currency = $user->getCurrency();
+        return PriceHelper::formatPrice($user, $this->getPrice($user));
 
-        return preg_replace(
-            '/\.00\s?$/',
-            '',
-            Number::currency(
-                $currency->decimal_type === CurrencyDecimalType::TWO_DECIMAL
-                    ? $this->getPrice($user) / 100
-                    : $this->getPrice($user),
-                in: $currency->iso_code,
-                locale: $user->locale
-            )
-        );
     }
 
     public function getDisplayCrossedPrice(User $user): ?string
     {
         if ($crossedPrice = $this->getCrossedPrice($user)) {
-            $currency = $user->getCurrency();
-
-            return preg_replace(
-                '/\.00\s?$/',
-                '',
-                Number::currency(
-                    $currency->decimal_type === CurrencyDecimalType::TWO_DECIMAL
-                        ? $crossedPrice / 100
-                        : $crossedPrice,
-                    in: $currency->iso_code,
-                    locale: $user->locale
-                )
-            );
+            return PriceHelper::formatPrice($user, $crossedPrice);
         }
 
         return null;
