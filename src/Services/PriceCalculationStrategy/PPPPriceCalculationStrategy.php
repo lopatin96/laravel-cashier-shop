@@ -201,7 +201,7 @@ class PPPPriceCalculationStrategy implements PriceCalculationStrategy
         'tc' => 22915,
         'tv' => 5423,
         'ug' => 2921,
-        'ua' => 16003*1.3,
+        'ua' => 16003*1.4,
         'ae' => 78915,
         'gb' => 57461,
         'us' => 76329,
