@@ -8,7 +8,6 @@ use Illuminate\Support\Number;
 
 class PriceHelper
 {
-
     public static function formatPrice(User $user, int $price): string
     {
         $currency = $user->getCurrency();
