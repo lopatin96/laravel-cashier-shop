@@ -87,7 +87,6 @@ class Order extends Model
         });
 
         static::updated(static function (Order $order) {
-            Notification::send(User::find(1), new NewOrder($order));
             if (
                 $order->wasChanged('status')
                 && $order->getOriginal('status') === OrderStatus::Incomplete
