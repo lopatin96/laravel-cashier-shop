@@ -74,26 +74,22 @@ class Order extends Model
 
         static::updating(static function (Order $order) {
             if (
-                $order->product->model
-                && $order->isDirty('status')
+                $order->isDirty('status')
                 && $order->getOriginal('status') === OrderStatus::Incomplete
                 && $order->isCompleted()
-                && ($instance = $order->product->instance($order->user))
             ) {
-                $instance->process($order);
+                if (
+                    $order->product->model
+                    && ($instance = $order->product->instance($order->user))
+                ) {
+                    $instance->process($order);
 
-                $order->status = OrderStatus::Processed;
-            }
-        });
+                    $order->status = OrderStatus::Processed;
+                }
 
-        static::updated(static function (Order $order) {
-            if (
-                $order->wasChanged('status')
-                && $order->getOriginal('status') === OrderStatus::Incomplete
-                && $order->isCompleted()
-                && in_array(substr(NewOrder::class, strrpos(NewOrder::class, '\\') + 1), ConfiguratorHelper::getValue(ConfigKey::NotificationNotifyAbout), true)
-            ) {
-                Notification::send(User::find(1), new NewOrder($order));
+                if (in_array(substr(NewOrder::class, strrpos(NewOrder::class, '\\') + 1), ConfiguratorHelper::getValue(ConfigKey::NotificationNotifyAbout), true)) {
+                    Notification::send(User::find(1), new NewOrder($order));
+                }
             }
         });
     }
