@@ -21,7 +21,6 @@ return [
 
     'order-history.title' => 'Historie objednávek',
     'order-history.product' => 'Produkt',
-    'order-history.quantity' => 'Množství',
     'order-history.date' => 'Datum',
 
     'buttons.buy.title' => 'Koupit teď',

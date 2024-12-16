@@ -21,7 +21,6 @@ return [
 
     'order-history.title' => 'Sipariş Geçmişi',
     'order-history.product' => 'Ürün',
-    'order-history.quantity' => 'Miktar',
     'order-history.date' => 'Tarih',
 
     'buttons.buy.title' => 'Şimdi Satın Al',

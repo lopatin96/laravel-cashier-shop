@@ -21,7 +21,6 @@ return [
 
     'order-history.title' => 'Order history',
     'order-history.product' => 'Product',
-    'order-history.quantity' => 'Quantity',
     'order-history.date' => 'Date',
 
     'buttons.buy.title' => 'Buy Now',

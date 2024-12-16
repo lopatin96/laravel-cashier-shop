@@ -21,7 +21,6 @@ return [
 
     'order-history.title' => 'Rendelési Történet',
     'order-history.product' => 'Termék',
-    'order-history.quantity' => 'Mennyiség',
     'order-history.date' => 'Dátum',
 
     'buttons.buy.title' => 'Vásárolj most',

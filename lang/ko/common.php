@@ -21,7 +21,6 @@ return [
 
     'order-history.title' => '주문 내역',
     'order-history.product' => '제품',
-    'order-history.quantity' => '수량',
     'order-history.date' => '날짜',
 
     'buttons.buy.title' => '지금 구매',

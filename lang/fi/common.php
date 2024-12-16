@@ -21,7 +21,6 @@ return [
 
     'order-history.title' => 'Tilaushistoria',
     'order-history.product' => 'Tuote',
-    'order-history.quantity' => 'Määrä',
     'order-history.date' => 'Päivämäärä',
 
     'buttons.buy.title' => 'Osta nyt',

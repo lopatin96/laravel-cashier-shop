@@ -21,7 +21,6 @@ return [
 
     'order-history.title' => '订单历史',
     'order-history.product' => '产品',
-    'order-history.quantity' => '数量',
     'order-history.date' => '日期',
 
     'buttons.buy.title' => '立即购买',

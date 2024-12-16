@@ -4,7 +4,6 @@
             <thead class="border-b bg-neutral-50 font-medium dark:border-neutral-500 dark:text-neutral-800">
             <tr>
                 <th class="px-4 py-3 uppercase">{{ __('laravel-cashier-shop::common.order-history.product') }}</th>
-                <th class="px-4 py-3 uppercase">{{ __('laravel-cashier-shop::common.order-history.quantity') }}</th>
                 <th class="px-4 py-3 uppercase">{{ __('laravel-cashier-shop::common.order-history.date') }}</th>
             </tr>
             </thead>
@@ -12,7 +11,6 @@
             @foreach($orders as $order)
                 <tr class="border-b">
                     <td class="px-4 py-3">{{ __('laravel-cashier-shop::specific.products.' . $order->product->category . '.' . $order->product->name . '.title') }}</td>
-                    <td class="px-4 py-3">{{ $order->quantity }}</td>
                     <td class="px-4 py-3">{{ $order->created_at->diffForHumans() }}</td>
                 </tr>
             @endforeach

@@ -21,7 +21,6 @@ return [
 
     'order-history.title' => '注文履歴',
     'order-history.product' => '製品',
-    'order-history.quantity' => '数量',
     'order-history.date' => '日付',
 
     'buttons.buy.title' => '今すぐ購入'

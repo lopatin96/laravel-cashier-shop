@@ -21,7 +21,6 @@ return [
 
     'order-history.title' => 'Bestelgeschiedenis',
     'order-history.product' => 'Product',
-    'order-history.quantity' => 'Hoeveelheid',
     'order-history.date' => 'Datum',
 
     'buttons.buy.title' => 'Nu kopen',
