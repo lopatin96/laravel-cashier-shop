@@ -17,7 +17,9 @@ use Illuminate\Support\Str;
 class FreekassaPaymentService extends PaymentService
 {
     private int $merchantId = 57713;
+    private string $secret = '(Em?g{]{u,)m}rQ';
     private string $merchantSecret = 'Zf8dGzuhd%w*ziP';
+    private string $apiKey = 'Zf8dGzuhd%w*ziP';
     private array $allowedIps = [
         '168.119.157.136',
         '168.119.60.227',
@@ -51,37 +53,26 @@ class FreekassaPaymentService extends PaymentService
             ]);
         }
 
-        $productData = [
-            'description' => __("laravel-cashier-shop::specific.products.$product->category.$product->name.subtitle"),
-            'metadata' => [
-                'name' => $product->name,
-                'category' => $product->category,
-            ]
-        ];
-
-        if ($product->image) {
-            $productData['images'] = [Storage::disk('s3')->temporaryUrl($product->image, now()->addMinute())];
-        }
-
-        $sessionOptions = [
-            'success_url' => route('checkout-success').'?session_id={CHECKOUT_SESSION_ID}',
-            'cancel_url' => route('checkout-cancel').'?session_id={CHECKOUT_SESSION_ID}',
-            'metadata' => ['order_id' => $order->id],
-        ];
-
         try {
-            $checkout = $this->request->user()->checkout([[
-                'price_data' => [
-                    'currency' => $currency->iso_code,
-                    'product_data' => array_merge($productData, [
-                        'name' => __("laravel-cashier-shop::specific.products.$product->category.$product->name.title"),
-                    ]),
-                    'unit_amount' => $price,
-                ],
-                'quantity' => $quantity,
-            ]], $sessionOptions);
+            // Данные для запроса
+            $order_amount = $price / 100;
+            $sign = md5($this->merchantId.':'.$order_amount.':'.$this->secret.':'.$currency->iso_code.':'.$order->id);
 
-            return redirect($checkout->url);
+            // Формируем URL для редиректа
+            $paymentUrl = 'https://pay.freekassa.com/';
+            $queryParams = http_build_query([
+                'm' => $this->merchantId,
+                'oa' => $order_amount,
+                'o' => $order->id,
+                's' => $sign,
+                'currency' => $currency->iso_code,
+                'i' => 1,
+                'lang' => 'ru',
+                'us_order_id' => $order->id,
+            ]);
+
+            // Выполняем редирект на сайт оплаты с параметрами
+            return redirect()->away($paymentUrl . '?' . $queryParams);
         } catch (IncompletePayment) {
             return redirect('/shop')->with([
                 'flash.banner' => __('An error has occurred. Please try again after some time.'),
