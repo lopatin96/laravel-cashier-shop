@@ -15,7 +15,7 @@ use Laravel\Cashier\Cashier;
 class FreekassaPaymentService extends PaymentService
 {
     private int $merchantId = 57713;
-    private string $merchantSecret = '(Em?g{]{u,)m}rQ';
+    private string $merchantSecret = 'Zf8dGzuhd%w*ziP';
     private array $allowedIps = [
         '168.119.157.136',
         '168.119.60.227',
@@ -167,7 +167,7 @@ class FreekassaPaymentService extends PaymentService
         }
 
         // Проверка подписи
-        $sign = md5($this->merchantId . ':' . $this->request->input('AMOUNT') . ':' . $this->merchantSecret . ':' . $this->request->input('MERCHANT_ORDER_ID'));
+        $sign = md5($this->merchantId . ':' . $this->request->input('AMOUNT') . ':RUB:' . $this->merchantSecret . ':' . $this->request->input('MERCHANT_ORDER_ID'));
         if ($sign !== $this->request->input('SIGN')) {
             abort(400, 'Wrong sign');
         }
