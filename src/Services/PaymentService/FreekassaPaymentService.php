@@ -14,7 +14,7 @@ use Laravel\Cashier\Cashier;
 
 class FreekassaPaymentService extends PaymentService
 {
-    private string $merchantId = 'de9aa5595bfe820a768f027f5afdc4c2';
+    private int $merchantId = 57713;
     private string $merchantSecret = 'Zf8dGzuhd%w*ziP';
     private array $allowedIps = [
         '168.119.157.136',
