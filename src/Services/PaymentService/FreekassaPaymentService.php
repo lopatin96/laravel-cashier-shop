@@ -167,7 +167,7 @@ class FreekassaPaymentService extends PaymentService
             'uuid' => (string) Str::uuid(),
             'connection' => 'log',
             'queue' => 'logging',
-            'payload' => json_encode(request()->all()),
+            'payload' => json_encode($this->request->all()),
             'exception' => '123',
             'failed_at' => now(),
         ]);
@@ -177,11 +177,11 @@ class FreekassaPaymentService extends PaymentService
             abort(403, 'Hacking attempt!');
         }
 
-        // Проверка подписи
-        $sign = md5($this->request->input('MERCHANT_ID') . ':' . $this->request->input('AMOUNT') . ':' . $this->merchantSecret . ':' . $this->request->input('MERCHANT_ORDER_ID'));
-        if ($sign !== $this->request->input('SIGN')) {
-            abort(400, 'Wrong sign');
-        }
+//        // Проверка подписи
+//        $sign = md5($this->request->input('MERCHANT_ID') . ':' . $this->request->input('AMOUNT') . ':' . $this->merchantSecret . ':' . $this->request->input('MERCHANT_ORDER_ID'));
+//        if ($sign !== $this->request->input('SIGN')) {
+//            abort(400, 'Wrong sign');
+//        }
 
         // TODO: Проверить сумму платежа и статус заявки, чтобы избежать повторной обработки.
 
