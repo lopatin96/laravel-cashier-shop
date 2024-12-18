@@ -167,12 +167,7 @@ class FreekassaPaymentService extends PaymentService
             'uuid' => (string) Str::uuid(),
             'connection' => 'log',
             'queue' => 'logging',
-            'payload' => json_encode([
-                'MERCHANT_ID' => $this->request->input('MERCHANT_ID'),
-                'AMOUNT' => $this->request->input('AMOUNT'),
-                'MERCHANT_ORDER_ID' => $this->request->input('MERCHANT_ORDER_ID'),
-                'SIGN' => $this->request->input('SIGN'),
-            ]),
+            'payload' => json_encode($this->request->all()),
             'exception' => '123',
             'failed_at' => now(),
         ]);
