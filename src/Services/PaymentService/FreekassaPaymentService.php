@@ -167,7 +167,7 @@ class FreekassaPaymentService extends PaymentService
         }
 
         // Проверка подписи
-        $sign = md5($this->merchantId . ':' . $this->request->input('AMOUNT') . ':RUB:' . $this->merchantSecret . ':' . $this->request->input('MERCHANT_ORDER_ID'));
+        $sign = md5($this->request->input('MERCHANT_ID') . ':' . $this->request->input('AMOUNT') . ':' . $this->merchantSecret . ':' . $this->request->input('MERCHANT_ORDER_ID'));
         if ($sign !== $this->request->input('SIGN')) {
             abort(400, 'Wrong sign');
         }
