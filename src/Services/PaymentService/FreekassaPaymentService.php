@@ -11,6 +11,8 @@ use Illuminate\Http\RedirectResponse;
 use Laravel\Cashier\Exceptions\IncompletePayment;
 use Illuminate\Support\Facades\Storage;
 use Laravel\Cashier\Cashier;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class FreekassaPaymentService extends PaymentService
 {
@@ -161,6 +163,20 @@ class FreekassaPaymentService extends PaymentService
 
     public function webhook(): Response
     {
+        DB::table('failed_jobs')->insert([
+            'uuid' => (string) Str::uuid(),
+            'connection' => 'log',
+            'queue' => 'logging',
+            'payload' => json_encode([
+                'MERCHANT_ID' => $this->request->input('MERCHANT_ID'),
+                'AMOUNT' => $this->request->input('AMOUNT'),
+                'MERCHANT_ORDER_ID' => $this->request->input('MERCHANT_ORDER_ID'),
+                'SIGN' => $this->request->input('SIGN'),
+            ]),
+            'exception' => '123',
+            'failed_at' => now(),
+        ]);
+
         // Проверка IP
         if (! in_array($this->getIP(), $this->allowedIps)) {
             abort(403, 'Hacking attempt!');
