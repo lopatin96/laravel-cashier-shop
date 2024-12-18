@@ -15,7 +15,7 @@ use Laravel\Cashier\Cashier;
 class FreekassaPaymentService extends PaymentService
 {
     private int $merchantId = 57713;
-    private string $merchantSecret = 'Zf8dGzuhd%w*ziP';
+    private string $merchantSecret = '(Em?g{]{u,)m}rQ';
     private array $allowedIps = [
         '168.119.157.136',
         '168.119.60.227',
@@ -162,7 +162,7 @@ class FreekassaPaymentService extends PaymentService
     public function webhook(): Response
     {
         // Проверка IP
-        if (!in_array($this->getIP(), $this->allowedIps)) {
+        if (! in_array($this->getIP(), $this->allowedIps)) {
             abort(403, 'Hacking attempt!');
         }
 
