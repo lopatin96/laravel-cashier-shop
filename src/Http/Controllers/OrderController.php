@@ -5,10 +5,8 @@ namespace Atin\LaravelCashierShop\Http\Controllers;
 use Atin\LaravelCashierShop\Enums\OrderStatus;
 use Atin\LaravelCashierShop\Enums\ProductStatus;
 use Atin\LaravelCashierShop\Models\Product;
-use Atin\LaravelCashierShop\Services\PaymentService\FreekassaPaymentService;
 use Atin\LaravelCashierShop\Services\PaymentService\PaymentService;
-use Atin\LaravelCashierShop\Services\PaymentService\StripePaymentService;
-use Illuminate\Http\Request;
+use Atin\LaravelCashierShop\Services\PaymentService\PaymentServiceFactory;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 
@@ -16,9 +14,9 @@ class OrderController extends Controller
 {
     private PaymentService $paymentService;
 
-    public function __construct(Request $request)
+    public function __construct()
     {
-        $this->paymentService = auth()->id() < 10 ? new FreekassaPaymentService($request) : new StripePaymentService($request);
+        $this->paymentService = PaymentServiceFactory::make();
     }
 
     public function index(): View

@@ -1,7 +1,6 @@
 <?php
 
 use Atin\LaravelCashierShop\Http\Controllers\OrderController;
-use Atin\LaravelCashierShop\Services\PaymentService\FreekassaPaymentService;
 
 Route::middleware(['auth', 'web'])->group(function () {
     Route::get('/shop', [OrderController::class, 'index'])
@@ -15,8 +14,4 @@ Route::middleware(['auth', 'web'])->group(function () {
 
     Route::get('/checkout/{product}/{quantity?}', [OrderController::class, 'checkout'])
         ->name('checkout');
-});
-
-Route::get('/freekassa', static function () {
-    return (new FreekassaPaymentService(request()))->webhook();
 });
