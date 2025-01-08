@@ -64,7 +64,7 @@
         <div
             x-data="{
                 quantity: 1,
-                max_quantity: {{ $product->properties->max_quantity }},
+                max_quantity: {{ $product->properties->max_quantity ?? 1 }},
                 hashid: '{{ $product->hashid }}',
             }"
             class="space-y-2"

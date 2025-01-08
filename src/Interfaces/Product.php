@@ -3,6 +3,7 @@
 namespace Atin\LaravelCashierShop\Interfaces;
 
 use App\Models\User;
+use Atin\LaravelCashierShop\Models\Order;
 
 abstract class Product
 {
@@ -10,7 +11,7 @@ abstract class Product
         protected User $user
     ) {}
 
-    abstract public function process(): void;
+    abstract public function process(Order $order): void;
 
     abstract public function isListed(): bool;
 

@@ -10,8 +10,13 @@
             <tbody class="text-sm">
             @foreach($orders as $order)
                 <tr class="border-b">
-                    <td class="px-4 py-3">{{ __('laravel-cashier-shop::specific.products.' . $order->product->category . '.' . $order->product->name . '.title') }}</td>
-                    <td class="px-4 py-3">{{ $order->created_at->diffForHumans() }}</td>
+                    <td class="px-4 py-3">
+                        {{ __('laravel-cashier-shop::specific.products.' . $order->product->category . '.' . $order->product->name . '.title') }}
+                        @if($order->quantity > 1) (×{{ $order->quantity }})@endif
+                    </td>
+                    <td class="px-4 py-3">
+                        {{ $order->created_at->diffForHumans() }}
+                    </td>
                 </tr>
             @endforeach
             </tbody>
