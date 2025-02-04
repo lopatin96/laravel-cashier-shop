@@ -25,7 +25,7 @@ trait HasOrders
 
         foreach($this->orders->where('status', OrderStatus::Processed) as $order) {
             if (property_exists($order->log, 'amount') && property_exists($order->log, 'currency')) {
-                $amountInCents += $order->log->amount / config('laravel-cashier-shop.exchange_rates_for_usd')[$order->log->currency];
+                $amountInCents += $order->quantity * $order->log->amount / config('laravel-cashier-shop.exchange_rates_for_usd')[$order->log->currency];
             }
         }
 
