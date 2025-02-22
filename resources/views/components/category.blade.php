@@ -1,10 +1,14 @@
 <div class="space-y-6 mt-6">
     <div class="bg-white sm:rounded-lg shadow-sm">
         <div>
-            <div class="flex justify-between">
-                <h2 class="pl-6 pt-6 text-xl font-semibold text-gray-700">
+            <div class="p-6">
+                <h2 class="text-xl font-semibold text-gray-700">
                     {{ __("laravel-cashier-shop::specific.categories.$category.title") }}
                 </h2>
+
+                <p class="text-gray-500">
+                    {{ __("laravel-cashier-shop::specific.categories.$category.description") }}
+                </p>
             </div>
 
             <div class="px-6 pb-6">

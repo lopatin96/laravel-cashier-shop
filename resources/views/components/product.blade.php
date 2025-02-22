@@ -41,8 +41,13 @@
                             <span class="absolute left-0 right-0 top-1/2 transform -translate-y-1/2 -rotate-12 h-0.5 bg-red-600 opacity-75"></span>
                         </span>
                     @endif
-                    <span class="text-2xl font-bold">
+                    <span class="relative text-2xl font-bold">
                         {{ $product->getDisplayPrice(auth()->user()) }}
+                        @if($product->properties->show_discount_percentage ?? false)
+                            <span class="absolute -top-4 -right-4  px-1.5 inline-flex border border-red-200 items-center gap-x-1 text-xs font-medium bg-red-100 text-red-800 rounded-full">
+                                -{{ 100 - $product->getPrice(auth()->user()) * 100 / $product->getCrossedPrice(auth()->user()) }}%
+                            </span>
+                        @endif
                     </span>
                 </div>
             @else
