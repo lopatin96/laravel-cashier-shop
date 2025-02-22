@@ -6,7 +6,7 @@
                     {{ __("laravel-cashier-shop::specific.categories.$category.title") }}
                 </h2>
 
-                <p class="text-gray-500 leading-tight">
+                <p class="mt-1 text-gray-500 leading-tight">
                     {{ __("laravel-cashier-shop::specific.categories.$category.description") }}
                 </p>
             </div>
