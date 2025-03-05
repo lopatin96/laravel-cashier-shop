@@ -45,7 +45,7 @@
                         {{ $product->getDisplayPrice(auth()->user()) }}
                         @if($product->properties->show_discount_percentage ?? false)
                             <span class="absolute -top-4 -right-4  px-1.5 inline-flex border border-red-200 items-center gap-x-1 text-xs font-medium bg-red-100 text-red-800 rounded-full">
-                                -{{ 100 - $product->getPrice(auth()->user()) * 100 / $product->getCrossedPrice(auth()->user()) }}%
+                                -{{ round(100 - $product->getPrice(auth()->user()) * 100 / $product->getCrossedPrice(auth()->user())) }}%
                             </span>
                         @endif
                     </span>
